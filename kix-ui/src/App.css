@@ -1,0 +1,73 @@
+/* @import url("https://fonts.googleapis.com/css?family=Lato&display=swap"); */
+@import url("https://fonts.googleapis.com/css?family=Ubuntu&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  /* font-family: "Lato", sans-serif; */
+  font-family: "Ubuntu", sans-serif;
+}
+
+.kix {
+  font-weight: 700;
+  text-decoration: none;
+  color: #4ecca3 !important;
+}
+
+.homebanner {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 250px;
+}
+
+.productCard {
+  margin-top: 150px;
+  margin-bottom: 150px;
+  width: 100%;
+  flex-wrap: wrap;
+  /* height: 250px; */
+  justify-content: space-around;
+}
+
+.productCard > * {
+  margin: 1em 0;
+}
+
+.bannerCard {
+  overflow: hidden;
+}
+
+.loginform {
+  border: 1px solid rgba(0, 0, 0, 0.068);
+  border-radius: 5px;
+  width: 70%;
+  height: 100%;
+  margin-top: 30vh;
+  padding: 40px;
+}
+
+.btnlogin {
+  transition: ease-in 0.2s;
+  background-color: #4ecca3;
+  border-color: #4ecca3;
+}
+
+.btnlogin:focus {
+  background-color: #28c08d;
+  border-color: #28c08d;
+}
+.btnlogin:hover {
+  background-color: #28c08d;
+  border-color: #28c08d;
+}
+
+.btnlogin:disabled {
+  background-color: grey;
+  border-color: grey;
+  cursor: no-drop;
+}
+
+.foooter {
+  margin-bottom: 0;
+}
