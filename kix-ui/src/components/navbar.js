@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Navbar from "react-bootstrap/Navbar";
+// import { Link } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -31,37 +31,23 @@ class Header extends Component {
                 <NavDropdown.Item href="/">Separated link</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Form inline>
-              {/* <div className="input-group mr-sm-2">
-                <input
-                  className="form-control border-right-0"
-                  placeholder="Search"
-                ></input>
-                <span className="input-group-append bg-white">
-                  <button className="btn border border-left-0" type="button">
-                    <i>
-                      <SearchIcon />
-                    </i>
-                  </button>
-                </span>
-              </div> */}
-              <InputGroup className="mr-sm-2">
-                <FormControl aria-label="Amount (to the nearest dollar)" />
+            <Form inline className="mr-auto">
+              <InputGroup className="mr-sm-2 searchBar">
+                <FormControl />
                 <InputGroup.Append>
-                  <Button variant="outline-secondary">
+                  <Button
+                    className="btn border border-left-0"
+                    style={{ height: "34px" }}
+                    variant="outline-secondary"
+                  >
                     <SearchIcon />
                   </Button>
                 </InputGroup.Append>
               </InputGroup>
-              {/* <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              ></FormControl> */}
             </Form>
             <Nav className="ml-auto">
               <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/login">Register</Nav.Link>
+              <Nav.Link href="/register">Register</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

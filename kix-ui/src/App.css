@@ -34,6 +34,10 @@ body {
   margin: 1em 0;
 }
 
+.carrd:hover {
+  cursor: pointer !important;
+}
+
 .bannerCard {
   overflow: hidden;
 }
@@ -41,9 +45,18 @@ body {
 .loginform {
   border: 1px solid rgba(0, 0, 0, 0.068);
   border-radius: 5px;
-  width: 70%;
+  width: 100vh;
   height: 100%;
   margin-top: 30vh;
+  padding: 40px;
+}
+
+.regisform {
+  border: 1px solid rgba(0, 0, 0, 0.068);
+  border-radius: 5px;
+  width: 100vh;
+  height: 100%;
+  margin-top: 10vh;
   padding: 40px;
 }
 
@@ -70,4 +83,14 @@ body {
 
 .foooter {
   margin-bottom: 0;
+}
+
+.searchBar {
+  width: 30vh !important;
+  transition: ease-in-out, width 0.35s ease-in-out;
+}
+
+.searchBar:hover {
+  width: 90vh !important;
+  left: 0 !important;
 }
