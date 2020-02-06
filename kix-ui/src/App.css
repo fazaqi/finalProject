@@ -34,8 +34,14 @@ body {
   margin: 1em 0;
 }
 
+/* .carrd {
+  transition: width 0.9s ease-in-out !important;
+} */
+
 .carrd:hover {
   cursor: pointer !important;
+  position: relative;
+  top: -5px;
 }
 
 .bannerCard {
@@ -86,11 +92,28 @@ body {
 }
 
 .searchBar {
-  width: 30vh !important;
-  transition: ease-in-out, width 0.35s ease-in-out;
+  width: 30vh;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 13px;
+  background-color: white;
+  background-image: url("./support/search.svg");
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.6s ease-in-out;
+  transition: width 0.6s ease-in-out;
 }
 
-.searchBar:hover {
-  width: 90vh !important;
-  left: 0 !important;
+.searchBar:focus {
+  width: 90vh;
+  outline-width: 0;
+}
+
+.leftBorderDiv {
+  border-left: 1px solid rgba(0, 0, 0, 0.068);
+  padding-left: 2px;
+  margin-right: 12px;
+  margin-left: 15px;
 }

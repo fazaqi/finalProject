@@ -3,6 +3,9 @@ import Navbar from "../components/navbar";
 import { Jumbotron, Container, Card } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import shoes from "./../support/shoes.png";
+import banner1 from "../support/banner/patu-01.png";
+import banner2 from "../support/banner/patu-02.png";
+import banner3 from "../support/banner/patu-03.png";
 import shoescard from "./../support/1.png";
 
 class Homepage extends Component {
@@ -27,12 +30,12 @@ class Homepage extends Component {
               style={{ width: "65vh" }}
             >
               <Card.Img
-                src={shoes}
+                src={banner1}
                 alt="Card image"
-                style={{ width: "100%", height: "270px" }}
+                style={{ width: "100%", height: "300px" }}
               />
               <Card.ImgOverlay>
-                <Card.Title>Banner 1</Card.Title>
+                <Card.Title>Casual</Card.Title>
                 {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
@@ -46,12 +49,12 @@ class Homepage extends Component {
               style={{ width: "65vh" }}
             >
               <Card.Img
-                src={shoes}
+                src={banner2}
                 alt="Card image"
-                style={{ width: "100%", height: "270px" }}
+                style={{ width: "100%", height: "300px" }}
               />
               <Card.ImgOverlay>
-                <Card.Title>Banner 2</Card.Title>
+                <Card.Title>Sneakers</Card.Title>
                 {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
@@ -65,12 +68,12 @@ class Homepage extends Component {
               style={{ width: "65vh" }}
             >
               <Card.Img
-                src={shoes}
+                src={banner3}
                 alt="Card image"
-                style={{ width: "100%", height: "270px" }}
+                style={{ width: "100%", height: "300px" }}
               />
               <Card.ImgOverlay>
-                <Card.Title>Banner 3</Card.Title>
+                <Card.Title>Formal</Card.Title>
                 {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
