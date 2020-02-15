@@ -82,12 +82,25 @@ class Register extends Component {
             error="true"
           />
 
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid
+            container
+            spacing={1}
+            alignItems="flex-end"
+            style={{ width: "auto", border: "1px solid red" }}
+          >
             <Grid item>
               <AlternateEmailIcon />
             </Grid>
             <Grid item>
-              <TextField id="input-with-icon-grid" label="With a grid" />
+              <TextField
+                id="input-with-icon-grid"
+                label="With a grid"
+                style={{
+                  minWidth: "100%",
+                  maxWidth: "100%",
+                  border: "1px solid red"
+                }}
+              />
             </Grid>
           </Grid>
 

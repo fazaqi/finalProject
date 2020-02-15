@@ -9,8 +9,6 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Button from "react-bootstrap/Button";
-import Axios from "axios";
-import { APIURL } from "./../helper/apiUrl";
 import { connect } from "react-redux";
 import { userLoginAct } from "../redux/actions";
 import { Redirect } from "react-router-dom";
@@ -27,20 +25,6 @@ class Login extends Component {
     let username = this.state.username;
     let password = this.state.password;
     this.props.userLoginAct(username, password);
-    // Axios.get(`${APIURL}user/login?username=${username}&password=${password}`)
-    //   .then(res => {
-    //     if (res.data.length) {
-    //       // console.log(res.data[0]);
-    //       localStorage.setItem("kix", res.data[0].id);
-    //       this.props.userSuccess(res.data[0]);
-    //     } else {
-    //       // console.log("username / password salah");
-    //       this.props.userError();
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   };
 
   //Untuk menghilangkan border biru saat toggle password di klik

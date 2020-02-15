@@ -1,7 +1,19 @@
 const { db } = require("../connection");
-const hashpassword = require("./../helper/encrypt");
+const crypto = require("./../helper/encrypt");
 
 module.exports = {
+  tesCrypto: (req, res) => {
+    console.log(req.query);
+    const { username, password } = req.query;
+    const hashpassword = crypto(password);
+    let data = {
+      username,
+      password: hashpassword
+    };
+    console.log(data);
+    res.status(200).send(data);
+    // if (err) res.status(500).send(err)
+  },
   getUser: (req, res) => {
     // console.log(req.params.id);
     const { id } = req.params;
@@ -14,14 +26,16 @@ module.exports = {
   login: (req, res) => {
     // console.log(req.query);
     const { username, password } = req.query;
+    // console.log(username, password);
     if (username && password) {
-      var sql = `SELECT * FROM users WHERE username='${username}' AND password='${password}'`;
+      const hashpassword = crypto(password);
+      var sql = `SELECT * FROM users WHERE (username='${username}' AND password='${hashpassword}') OR (email='${username}' AND password='${hashpassword}')`;
       db.query(sql, (err, result) => {
         if (err) res.status(500).send(err);
         return res.status(200).send(result);
       });
     } else {
-      return res.status(500).send({ message: "error cuy" });
+      return res.status(500).send({ message: "Login Error" });
     }
   },
   register: (req, res) => {

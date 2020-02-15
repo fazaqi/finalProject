@@ -1,15 +1,21 @@
+//Import Tools
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+
+//Redux
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import Thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import Reducers from "./redux/reducers";
+
+//Style
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "typeface-roboto";
+
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import Reducers from "./redux/reducers";
-import Thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
 import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(

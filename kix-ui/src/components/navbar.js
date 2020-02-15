@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form } from "react-bootstrap";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+// import Badge from "@material-ui/core/Badge";
 
 class Header extends Component {
   state = {};
@@ -39,9 +39,11 @@ class Header extends Component {
               </Form>
             </Nav>
             <Nav className="ml-auto">
+              {/* <Badge badgeContent={4} color="error"> */}
               <IconButton style={{ outlineWidth: "0" }}>
                 <ShoppingCartOutlinedIcon />
               </IconButton>
+              {/* </Badge> */}
               <div className="leftBorderDiv"></div>
               <Nav.Link href="/login">Login</Nav.Link>
               <Nav.Link href="/register">Register</Nav.Link>

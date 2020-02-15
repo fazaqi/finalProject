@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Navbar from "../components/navbar";
 import { Jumbotron, Container, Card } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
-import shoes from "./../support/shoes.png";
 import banner1 from "../support/banner/patu-01.png";
 import banner2 from "../support/banner/patu-02.png";
 import banner3 from "../support/banner/patu-03.png";
