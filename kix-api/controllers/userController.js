@@ -2,14 +2,23 @@ const { db } = require("../connection");
 const hashpassword = require("./../helper/encrypt");
 
 module.exports = {
+  getUser: (req, res) => {
+    // console.log(req.params.id);
+    const { id } = req.params;
+    var sql = `SELECT * FROM users WHERE id=${id}`;
+    db.query(sql, (err, result) => {
+      if (err) res.status(500).send(err);
+      return res.status(200).send(result);
+    });
+  },
   login: (req, res) => {
     // console.log(req.query);
     const { username, password } = req.query;
     if (username && password) {
       var sql = `SELECT * FROM users WHERE username='${username}' AND password='${password}'`;
       db.query(sql, (err, result) => {
-        if (err) res.status(500).send({ status: "error", err });
-        return res.status(200).send({ result: result });
+        if (err) res.status(500).send(err);
+        return res.status(200).send(result);
       });
     } else {
       return res.status(500).send({ message: "error cuy" });
