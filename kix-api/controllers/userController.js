@@ -2,18 +2,18 @@ const { db } = require("../connection");
 const crypto = require("./../helper/encrypt");
 
 module.exports = {
-  tesCrypto: (req, res) => {
-    console.log(req.query);
-    const { username, password } = req.query;
-    const hashpassword = crypto(password);
-    let data = {
-      username,
-      password: hashpassword
-    };
-    console.log(data);
-    res.status(200).send(data);
-    // if (err) res.status(500).send(err)
-  },
+  // tesCrypto: (req, res) => {
+  //   console.log(req.query);
+  //   const { username, password } = req.query;
+  //   const hashpassword = crypto(password);
+  //   let data = {
+  //     username,
+  //     password: hashpassword
+  //   };
+  //   console.log(data);
+  //   res.status(200).send(data);
+  //   // if (err) res.status(500).send(err)
+  // },
   getUser: (req, res) => {
     // console.log(req.params.id);
     const { id } = req.params;
@@ -37,6 +37,29 @@ module.exports = {
     } else {
       return res.status(500).send({ message: "Login Error" });
     }
+  },
+  regisUser: (req, res) => {
+    const { username, password, email } = req.body;
+    const hashpassword = crypto(password);
+    var sql = `SELECT * FROM users WHERE username='${username}' OR email='${email}'`;
+    db.query(sql, (err, result) => {
+      if (err) res.status(500).send({ status: "error", err });
+      if (result.length === 0) {
+        sql = `INSERT INTO users SET ?`;
+        var data = {
+          username,
+          password: hashpassword,
+          email,
+          roleId: 3
+        };
+        db.query(sql, data, (err, resInsert) => {
+          if (err) res.status(500).send({ status: "Insert Error", err });
+          return res
+            .status(200)
+            .send({ status: "Registrasi User Berhasil", resInsert });
+        });
+      }
+    });
   },
   register: (req, res) => {
     const {

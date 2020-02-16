@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 
 //Tools
-import Axios from "axios";
 import { Switch, Route } from "react-router-dom";
-import { APIURL } from "./helper/apiUrl";
 import { connect } from "react-redux";
-import { userSuccess } from "./redux/actions";
+import { getDataUser } from "./redux/actions";
 
 //Pages
 import Login from "./pages/login";
@@ -19,13 +17,7 @@ class App extends Component {
   componentDidMount() {
     let id = localStorage.getItem("kix");
     if (id) {
-      Axios.get(`${APIURL}user/login/${id}`)
-        .then(res => {
-          this.props.userSuccess(res.data[0]);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.props.getDataUser(id);
     }
   }
 
@@ -46,4 +38,4 @@ const MapstateToprops = state => {
   };
 };
 
-export default connect(MapstateToprops, { userSuccess })(App);
+export default connect(MapstateToprops, { getDataUser })(App);
