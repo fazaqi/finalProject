@@ -8,7 +8,10 @@ import {
   FormControl
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import CloseIcon from "@material-ui/icons/Close";
+import Alert from "@material-ui/lab/Alert";
 import Button from "react-bootstrap/Button";
+import HeadShake from "react-reveal/HeadShake";
 import { connect } from "react-redux";
 import { userLoginAct } from "../redux/actions";
 import { Redirect } from "react-router-dom";
@@ -17,14 +20,25 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
-    showPassword: false
+    showPassword: false,
+    showError: false
   };
+
+  componentDidMount() {
+    if (this.props.Auth.error) {
+      this.setState({ showError: true });
+    }
+    // {
+    //   this.props.Auth.error ? this.setState({ showError: true }) : null;
+    // }
+  }
 
   //Untuk Login
   onSubmit = () => {
     let username = this.state.username;
     let password = this.state.password;
     this.props.userLoginAct(username, password);
+    this.setState({ showError: true });
   };
 
   //Untuk menghilangkan border biru saat toggle password di klik
@@ -52,7 +66,9 @@ class Login extends Component {
             className="form-control mb-5"
             label="Username"
             variant="outlined"
-            onChange={e => this.setState({ username: e.target.value })}
+            onChange={e =>
+              this.setState({ username: e.target.value, inputuser: false })
+            }
           />
           {/* Input Password */}
           <FormControl className="form-control mb-4" variant="outlined">
@@ -63,7 +79,9 @@ class Login extends Component {
               id="outlined-adornment-password"
               type={this.state.showPassword ? "text" : "password"}
               value={this.state.password}
-              onChange={e => this.setState({ password: e.target.value })}
+              onChange={e =>
+                this.setState({ password: e.target.value, inputpass: false })
+              }
               onKeyPress={this.keyPress}
               endAdornment={
                 <InputAdornment position="end">
@@ -97,8 +115,30 @@ class Login extends Component {
             Login
           </Button>
         </div>
-        <h1>{this.props.usernameLog}</h1>
-        <h2>{this.props.Auth.error}</h2>
+        {this.state.showError ? (
+          <HeadShake>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    this.setState({ showError: false });
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              variant="filled"
+              severity="error"
+            >
+              Username or Password Error
+            </Alert>
+          </HeadShake>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
