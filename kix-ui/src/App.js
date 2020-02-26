@@ -10,6 +10,7 @@ import { getDataUser } from "./redux/actions";
 import Login from "./pages/login";
 import Homepage from "./pages/home";
 import Register from "./pages/register";
+import UserProfile from "./pages/userProfile";
 
 class App extends Component {
   state = {};
@@ -27,6 +28,7 @@ class App extends Component {
         <Route path="/" exact component={Homepage} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
+        <Route path="/profile" exact component={UserProfile} />
       </Switch>
     );
   }

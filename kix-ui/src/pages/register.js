@@ -52,7 +52,7 @@ class Register extends Component {
     return (
       <div className="container regisform">
         <div className="form-group">
-          <h2 className="text-center mb-4">Register</h2>
+          <h2 className="text-center mb-4">Daftar Akun Baru</h2>
           {/* <TextField
             className="form-control mb-5"
             label="Username"
@@ -151,7 +151,7 @@ class Register extends Component {
             // disabled={this.state.username === "" ? true : false}
             size="lg"
           >
-            Register
+            Daftar
           </Button>
         </div>
       </div>

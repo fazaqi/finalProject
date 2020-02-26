@@ -4,6 +4,7 @@ import { Navbar, Nav, NavDropdown, Form } from "react-bootstrap";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 // import Badge from "@material-ui/core/Badge";
+import { connect } from "react-redux";
 
 class Header extends Component {
   state = {};
@@ -19,7 +20,7 @@ class Header extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <NavDropdown
-                title="Category"
+                title="Kategori"
                 id="basic-nav-dropdown"
                 className="mt-1 mr-5"
               >
@@ -34,26 +35,42 @@ class Header extends Component {
                   type="text"
                   className="searchBar"
                   name="search"
-                  placeholder="Search.."
+                  placeholder="Cari di sini.."
                 />
               </Form>
             </Nav>
-            <Nav className="ml-auto">
-              {/* <Badge badgeContent={4} color="error"> */}
+            {this.props.username === "" ? (
+              <Nav className="ml-auto">
+                {/* <Badge badgeContent={4} color="error"> */}
+                {/* <IconButton style={{ outlineWidth: "0" }}>
+                  <ShoppingCartOutlinedIcon />
+                </IconButton> */}
+                {/* </Badge> */}
+                {/* <div className="leftBorderDiv"></div> */}
+                <Nav.Link href="/login">Masuk</Nav.Link>
+                <Nav.Link href="/register">Daftar</Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className="ml-auto">
+                {/* <Badge badgeContent={4} color="error"> */}
+                <IconButton style={{ outlineWidth: "0" }}>
+                  <ShoppingCartOutlinedIcon />
+                </IconButton>
+                {/* </Badge> */}
+                <div className="leftBorderDiv"></div>
+                <Nav.Link href="/profile">Hi, {this.props.username}</Nav.Link>
+              </Nav>
+            )}
+            {/* <Nav className="ml-auto">
+              
               <IconButton style={{ outlineWidth: "0" }}>
                 <ShoppingCartOutlinedIcon />
               </IconButton>
-              {/* </Badge> */}
+              
               <div className="leftBorderDiv"></div>
-              <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/register">Register</Nav.Link>
-              {/* <Nav.Link href="/login">
-                <Button size="medium">Login</Button>
-              </Nav.Link>
-              <Nav.Link href="/register">
-                <Button size="medium">Register</Button>
-              </Nav.Link> */}
-            </Nav>
+              <Nav.Link href="/login">Masuk</Nav.Link>
+              <Nav.Link href="/register">Daftar</Nav.Link>
+            </Nav> */}
           </Navbar.Collapse>
         </Navbar>
       </div>
@@ -61,4 +78,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const MapstateToprops = state => {
+  return {
+    username: state.userLogin.username
+  };
+};
+
+export default connect(MapstateToprops)(Header);

@@ -8,12 +8,11 @@ import { APIURL } from "../../helper/apiUrl";
 //   };
 // };
 
-// export const userError = () => {
-//   return {
-//     type: "LOGIN_ERROR",
-//     payload: "Salah Username / Password"
-//   };
-// };
+export const clearError = () => {
+  return {
+    type: "CLEAR_ERROR"
+  };
+};
 
 export const getDataUser = id => {
   return dispatch => {

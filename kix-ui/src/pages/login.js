@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+//Import Style
 import {
   TextField,
   InputAdornment,
@@ -12,8 +14,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import Alert from "@material-ui/lab/Alert";
 import Button from "react-bootstrap/Button";
 import HeadShake from "react-reveal/HeadShake";
+
+//Import Tools
 import { connect } from "react-redux";
-import { userLoginAct } from "../redux/actions";
+import { userLoginAct, clearError } from "../redux/actions";
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -33,12 +37,19 @@ class Login extends Component {
     // }
   }
 
+  componentDidUpdate() {
+    console.log("masuk didupdate");
+  }
+
   //Untuk Login
   onSubmit = () => {
     let username = this.state.username;
     let password = this.state.password;
     this.props.userLoginAct(username, password);
-    this.setState({ showError: true });
+
+    // this.setState({ showError: true });
+
+    // this.setState({ showError: true });
   };
 
   //Untuk menghilangkan border biru saat toggle password di klik
@@ -53,6 +64,10 @@ class Login extends Component {
     }
   };
 
+  clearErr = () => {
+    this.props.clearError();
+  };
+
   render() {
     if (this.props.userLog) {
       return <Redirect to={"/"} />;
@@ -60,7 +75,7 @@ class Login extends Component {
     return (
       <div className="container loginform">
         <div className="form-group">
-          <h2 className="text-center mb-4">Login</h2>
+          <h2 className="text-center mb-4">Masuk ke akun kamu</h2>
           {/* Input Username */}
           <TextField
             className="form-control mb-5"
@@ -112,10 +127,10 @@ class Login extends Component {
             disabled={this.state.username === "" ? true : false}
             size="lg"
           >
-            Login
+            Masuk
           </Button>
         </div>
-        {this.state.showError ? (
+        {this.props.Auth.error ? (
           <HeadShake>
             <Alert
               action={
@@ -124,7 +139,8 @@ class Login extends Component {
                   color="inherit"
                   size="small"
                   onClick={() => {
-                    this.setState({ showError: false });
+                    // this.setState({ showError: false });
+                    this.clearErr();
                   }}
                 >
                   <CloseIcon fontSize="inherit" />
@@ -133,7 +149,7 @@ class Login extends Component {
               variant="filled"
               severity="error"
             >
-              Username or Password Error
+              Username atau Password Salah
             </Alert>
           </HeadShake>
         ) : (
@@ -152,4 +168,4 @@ const MapstateToprops = state => {
   };
 };
 
-export default connect(MapstateToprops, { userLoginAct })(Login);
+export default connect(MapstateToprops, { userLoginAct, clearError })(Login);
