@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+
+//Component
 import Navbar from "../components/navbar";
+
+//Style
 import { Jumbotron, Container, Card } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
+
+//Image
 import banner1 from "../support/banner/patu-01.png";
 import banner2 from "../support/banner/patu-02.png";
 import banner3 from "../support/banner/patu-03.png";

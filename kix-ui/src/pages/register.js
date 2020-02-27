@@ -78,6 +78,7 @@ class Register extends Component {
                 />
               </InputGroup>
             </Form.Group>
+
             {/* Input Password */}
             <Form.Group>
               <Form.Label>Password</Form.Label>
@@ -93,6 +94,7 @@ class Register extends Component {
                 />
               </InputGroup>
             </Form.Group>
+
             {/* Input Reenter Password */}
             <Form.Group>
               <Form.Label>Re-Enter Password</Form.Label>
@@ -108,6 +110,7 @@ class Register extends Component {
                 />
               </InputGroup>
             </Form.Group>
+
             {/* Input Email */}
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -135,6 +138,7 @@ class Register extends Component {
             Daftar
           </Button>
         </div>
+
         {/* Alert Error */}
         {this.state.inputerror ? (
           <HeadShake>
@@ -145,7 +149,7 @@ class Register extends Component {
               }}
               dismissible
             >
-              Input tidak boleh ada yang kosong!
+              Tidak boleh ada yang kosong!
             </Alert>
           </HeadShake>
         ) : this.state.passerror ? (
