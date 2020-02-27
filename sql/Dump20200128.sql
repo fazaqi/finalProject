@@ -27,8 +27,9 @@ CREATE TABLE `products` (
   `namaProduk` varchar(100) NOT NULL,
   `harga` int NOT NULL,
   `categoryId` int NOT NULL,
-  `descProduk` varchar(1000) NOT NULL,
+  `descProduk` varchar(1000) DEFAULT NULL,
   `kondisiId` int NOT NULL,
+  `usersId` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +40,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'sepatu kerja',1000,2,'ini sepatu kerja',1),(2,'sepatu jalan',2000,1,'ini sepatu jalan',1),(3,'sneaker',3000,3,'ini sneakers',2);
+INSERT INTO `products` VALUES (1,'sepatu kerja',1000,2,'ini sepatu kerja',1,9),(2,'sepatu jalan',2000,1,'ini sepatu jalan',1,2),(3,'sneaker',3000,3,'ini sneakers',2,10);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,9 +77,11 @@ DROP TABLE IF EXISTS `products_image`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products_image` (
   `id` int NOT NULL,
-  `image` varchar(45) NOT NULL,
-  `productsId` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
+  `image` varchar(200) DEFAULT NULL,
+  `productsId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_products_image_productsId_idx` (`productsId`),
+  CONSTRAINT `fk_products_image_productsId` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -124,10 +127,12 @@ DROP TABLE IF EXISTS `products_size`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products_size` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `size` varchar(45) DEFAULT NULL,
-  `productsId` int DEFAULT NULL,
-  `stock` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `size` decimal(3,1) DEFAULT NULL,
+  `productsId` int NOT NULL,
+  `stock` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_products_size_productsId_idx` (`productsId`),
+  CONSTRAINT `fk_products_size_productsId` FOREIGN KEY (`productsId`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,7 +142,7 @@ CREATE TABLE `products_size` (
 
 LOCK TABLES `products_size` WRITE;
 /*!40000 ALTER TABLE `products_size` DISABLE KEYS */;
-INSERT INTO `products_size` VALUES (1,'40',1,'3'),(2,'41',1,'1'),(3,'42',1,'4'),(4,'40',2,'3'),(5,'45',3,'5'),(6,'42',2,'1');
+INSERT INTO `products_size` VALUES (1,40.0,1,3),(2,41.0,1,1),(3,42.0,1,4),(4,40.0,2,3),(5,45.0,3,5),(6,42.0,2,1);
 /*!40000 ALTER TABLE `products_size` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,9 +158,9 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `roleId` varchar(45) NOT NULL,
+  `roleId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +169,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin','admin','1'),(2,'penjual','penjual','penjual','2'),(3,'user','user','user','3'),(4,'user1','user1','user1','3');
+INSERT INTO `users` VALUES (1,'admin','738660d0ea58a9a0d9c2baf4ea076d562244fb3369fafcda5e3f13fa7191688b','admin@bambang.com',1),(2,'penjual','penjual','penjual',2),(3,'user','user','user',3),(4,'user1','user1','user1',3),(5,'bambang','123','bambang@yahoo.com',3),(6,'bwambang','123','bambang@yahoo.com',3),(8,'bumbing','1233','bimbung@yahoo.com',2),(9,'buumbing','1233','bipmbung@yahoo.com',2),(10,'buoumbing','12233','bipmbuing@yahoo.com',2),(11,'wow','wiw','wuw',3),(12,'uwi','iwu','uwiwui',3),(13,'jajang','14ac269d6866c0686b7334b412b2b43c277ab23cedc8ac36d73c9d9ad1f0dee9','sutajang@',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,9 +187,11 @@ CREATE TABLE `users_pembeli` (
   `email` varchar(45) DEFAULT NULL,
   `jeniskelamin` varchar(45) DEFAULT NULL,
   `nomorhp` varchar(45) DEFAULT NULL,
-  `usersId` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `usersId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_users_pembeli_usersId_idx` (`usersId`),
+  CONSTRAINT `fk_users_pembeli_usersId` FOREIGN KEY (`usersId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +200,7 @@ CREATE TABLE `users_pembeli` (
 
 LOCK TABLES `users_pembeli` WRITE;
 /*!40000 ALTER TABLE `users_pembeli` DISABLE KEYS */;
-INSERT INTO `users_pembeli` VALUES (1,'buyer','jakarta','buiyer','wanita','081209876543','3'),(2,'jajang','bandung','jajang','pria','082212345678','4');
+INSERT INTO `users_pembeli` VALUES (1,'buyer','jakarta','buiyer','wanita','081209876543',3),(2,'jajang','bandung','jajang','pria','082212345678',4),(3,'bambang cahyadi','jakarta','bambang@yahoo.com','pria','081234567890',6);
 /*!40000 ALTER TABLE `users_pembeli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,9 +218,11 @@ CREATE TABLE `users_penjual` (
   `email` varchar(45) DEFAULT NULL,
   `nomorhp` varchar(45) DEFAULT NULL,
   `deskripsitoko` varchar(45) DEFAULT NULL,
-  `usersId` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `usersId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_users_penjual_usersId_idx` (`usersId`),
+  CONSTRAINT `fk_users_penjual_usersId` FOREIGN KEY (`usersId`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +231,7 @@ CREATE TABLE `users_penjual` (
 
 LOCK TABLES `users_penjual` WRITE;
 /*!40000 ALTER TABLE `users_penjual` DISABLE KEYS */;
-INSERT INTO `users_penjual` VALUES (1,'tokopatu','bekasi','tokopatu','081234567890','ini adalah toko sepatu','2');
+INSERT INTO `users_penjual` VALUES (1,'tokopatu','bekasi','tokopatu','081234567890','ini adalah toko sepatu',2),(2,'cahyadi shoes','bekasi','bipmbung@yahoo.com','081234567891','ini toko sepatu cahyadi',9),(3,'cahyakui shoes','bekasi','bipmbuing@yahoo.com','081234567821','ini toko sepatu cahkuydi',10);
 /*!40000 ALTER TABLE `users_penjual` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,4 +268,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-28 15:36:41
+-- Dump completed on 2020-02-27 16:51:15
