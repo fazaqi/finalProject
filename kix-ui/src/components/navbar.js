@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form } from "react-bootstrap";
-import IconButton from "@material-ui/core/IconButton";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-// import Badge from "@material-ui/core/Badge";
+import { FiShoppingCart } from "react-icons/fi";
 import { connect } from "react-redux";
 
 class Header extends Component {
@@ -41,36 +38,17 @@ class Header extends Component {
             </Nav>
             {this.props.username === "" ? (
               <Nav className="ml-auto">
-                {/* <Badge badgeContent={4} color="error"> */}
-                {/* <IconButton style={{ outlineWidth: "0" }}>
-                  <ShoppingCartOutlinedIcon />
-                </IconButton> */}
-                {/* </Badge> */}
-                {/* <div className="leftBorderDiv"></div> */}
                 <Nav.Link href="/login">Masuk</Nav.Link>
                 <Nav.Link href="/register">Daftar</Nav.Link>
               </Nav>
             ) : (
               <Nav className="ml-auto">
-                {/* <Badge badgeContent={4} color="error"> */}
-                <IconButton style={{ outlineWidth: "0" }}>
-                  <ShoppingCartOutlinedIcon />
-                </IconButton>
-                {/* </Badge> */}
+                {/* <ShoppingCartOutlinedIcon /> */}
+                <FiShoppingCart />
                 <div className="leftBorderDiv"></div>
                 <Nav.Link href="/profile">Hi, {this.props.username}</Nav.Link>
               </Nav>
             )}
-            {/* <Nav className="ml-auto">
-              
-              <IconButton style={{ outlineWidth: "0" }}>
-                <ShoppingCartOutlinedIcon />
-              </IconButton>
-              
-              <div className="leftBorderDiv"></div>
-              <Nav.Link href="/login">Masuk</Nav.Link>
-              <Nav.Link href="/register">Daftar</Nav.Link>
-            </Nav> */}
           </Navbar.Collapse>
         </Navbar>
       </div>

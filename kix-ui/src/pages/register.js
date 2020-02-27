@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import {
-  TextField,
-  InputAdornment,
-  IconButton,
-  Input,
-  InputLabel,
-  FormControl
-} from "@material-ui/core";
-// import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+
+//Style
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import HeadShake from "react-reveal/HeadShake";
+import InputGroup from "react-bootstrap/InputGroup";
+import { FaUserCircle, FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+
+//Tools
 import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
 
@@ -19,8 +19,8 @@ class Register extends Component {
     password: "",
     repassword: "",
     email: "",
-    showPassword: false,
-    showrePassword: false
+    passerror: false,
+    inputerror: false
   };
 
   onSubmit = () => {
@@ -31,20 +31,29 @@ class Register extends Component {
       repassword === "" ||
       email === ""
     ) {
-      return console.log("gaboleh ada yg kosong");
+      this.setState({ inputerror: true });
     } else if (password !== repassword) {
-      return console.log("password dan repass harus sama");
+      this.setState({ passerror: true });
     } else if ((username, password, repassword, email)) {
-      // let data = {username, password,email}
       Axios.post(`${APIURL}user/registuser`, { username, password, email })
         .then(res => {
           console.log(res);
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     }
   };
 
-  handleMouseDownPassword = event => {
+  clearAlert = param => {
+    if (param === "input") {
+      this.setState({ inputerror: false });
+    } else if (param === "pass") {
+      this.setState({ passerror: false });
+    }
+  };
+
+  handleDefault = event => {
     event.preventDefault();
   };
 
@@ -53,110 +62,111 @@ class Register extends Component {
       <div className="container regisform">
         <div className="form-group">
           <h2 className="text-center mb-4">Daftar Akun Baru</h2>
-          {/* <TextField
-            className="form-control mb-5"
-            label="Username"
-            variant="outlined"
-            onChange={e => this.setState({ username: e.target.value })}
-          /> */}
-
-          {/* Input Username */}
-          <TextField
-            // id="standard-basic"
-            className="form-control mb-5"
-            label="Username"
-            onChange={e => this.setState({ username: e.target.value })}
-          />
-
-          {/* Input Password */}
-          <FormControl className="form-control mb-5">
-            <InputLabel htmlFor="standard-adornment-password">
-              Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              type={this.state.showPassword ? "text" : "password"}
-              value={this.state.password}
-              onChange={e => this.setState({ password: e.target.value })}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() =>
-                      this.setState({ showPassword: !this.state.showPassword })
-                    }
-                    onMouseDown={this.handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {this.state.showPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelwidth={70}
-            />
-          </FormControl>
-
-          {/* Reenter Password */}
-          <FormControl className="form-control mb-5">
-            <InputLabel htmlFor="standard-adornment-repassword">
-              Re-enter Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-repassword"
-              type={this.state.showrePassword ? "text" : "password"}
-              value={this.state.repassword}
-              onChange={e => this.setState({ repassword: e.target.value })}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() =>
-                      this.setState({
-                        showrePassword: !this.state.showrePassword
-                      })
-                    }
-                    onMouseDown={this.handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {this.state.showPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-              labelwidth={70}
-            />
-          </FormControl>
-
-          {/* Input Email */}
-          <TextField
-            // id="standard-basic"
-            className="form-control mb-5"
-            label="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-            // error
-          />
+          <Form>
+            {/* Input Username */}
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>
+                    <FaUserCircle />
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  onChange={e => this.setState({ username: e.target.value })}
+                />
+              </InputGroup>
+            </Form.Group>
+            {/* Input Password */}
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>
+                    <FaLock />
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="password"
+                  onChange={e => this.setState({ password: e.target.value })}
+                />
+              </InputGroup>
+            </Form.Group>
+            {/* Input Reenter Password */}
+            <Form.Group>
+              <Form.Label>Re-Enter Password</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>
+                    <FaLock />
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="password"
+                  onChange={e => this.setState({ repassword: e.target.value })}
+                />
+              </InputGroup>
+            </Form.Group>
+            {/* Input Email */}
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>
+                    <MdEmail />
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="email"
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form>
 
           {/* Button Register */}
           <Button
             className="mt-4 btnlogin"
             onClick={this.onSubmit}
-            onMouseDown={this.handleMouseDownPassword}
-            // disabled={this.state.username === "" ? true : false}
+            onMouseDown={this.handleDefault}
             size="lg"
           >
             Daftar
           </Button>
         </div>
+        {/* Alert Error */}
+        {this.state.inputerror ? (
+          <HeadShake>
+            <Alert
+              variant="danger"
+              onClick={() => {
+                this.clearAlert("input");
+              }}
+              dismissible
+            >
+              Input tidak boleh ada yang kosong!
+            </Alert>
+          </HeadShake>
+        ) : this.state.passerror ? (
+          <HeadShake>
+            <Alert
+              variant="danger"
+              onClick={() => {
+                this.clearAlert("pass");
+              }}
+              dismissible
+            >
+              Password tidak match!
+            </Alert>
+          </HeadShake>
+        ) : null}
       </div>
     );
   }
 }
 
 export default Register;
+
+//Belom ada alert kalo berhasil
+//Redirect ke login page setelah berhasil
