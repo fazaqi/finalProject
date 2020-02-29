@@ -1,33 +1,16 @@
 import Axios from "axios";
 import { APIURL } from "../../helper/apiUrl";
 
-// export const userSuccess = userdata => {
-//   return {
-//     type: "LOGIN_SUCCESS",
-//     payload: userdata
-//   };
-// };
+export const getDataUser = userData => {
+  return {
+    type: "LOGIN_SUCCESS",
+    payload: userData
+  };
+};
 
 export const clearError = () => {
   return {
     type: "CLEAR_ERROR"
-  };
-};
-
-export const getDataUser = id => {
-  return dispatch => {
-    Axios.get(`${APIURL}user/login/${id}`)
-      .then(res => {
-        if (res.data.length) {
-          dispatch({
-            type: "LOGIN_SUCCESS",
-            payload: res.data[0]
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
   };
 };
 
@@ -54,5 +37,11 @@ export const userLoginAct = (username, password) => {
         console.log(err);
         dispatch({ type: "LOGIN_ERROR", payload: "Server Error" });
       });
+  };
+};
+
+export const logoutAct = () => {
+  return {
+    type: "LOGOUT"
   };
 };

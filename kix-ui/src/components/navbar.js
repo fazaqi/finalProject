@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown, Form } from "react-bootstrap";
 import { FiShoppingCart } from "react-icons/fi";
 import { connect } from "react-redux";
+import { logoutAct } from "../redux/actions";
 
 class Header extends Component {
   state = {};
+
+  onLogout = () => {
+    localStorage.removeItem("kix");
+    this.props.logoutAct();
+  };
 
   render() {
     return (
@@ -43,10 +49,21 @@ class Header extends Component {
               </Nav>
             ) : (
               <Nav className="ml-auto">
-                {/* <ShoppingCartOutlinedIcon /> */}
                 <FiShoppingCart />
                 <div className="leftBorderDiv"></div>
-                <Nav.Link href="/profile">Hi, {this.props.username}</Nav.Link>
+                <NavDropdown
+                  alignRight
+                  title={this.props.username}
+                  id="basic-nav-dropdown"
+                  className="mt-"
+                >
+                  <NavDropdown.Item href="/profile">Profil</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={this.onLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+                {/* <Nav.Link href="/profile">Hi, {this.props.username}</Nav.Link> */}
               </Nav>
             )}
           </Navbar.Collapse>
@@ -62,4 +79,4 @@ const MapstateToprops = state => {
   };
 };
 
-export default connect(MapstateToprops)(Header);
+export default connect(MapstateToprops, { logoutAct })(Header);
