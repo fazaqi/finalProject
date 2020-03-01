@@ -53,7 +53,7 @@ class Header extends Component {
                 <div className="leftBorderDiv"></div>
                 <NavDropdown
                   alignRight
-                  title={this.props.username}
+                  title={this.props.nama || this.props.username}
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
@@ -75,7 +75,8 @@ class Header extends Component {
 
 const MapstateToprops = state => {
   return {
-    username: state.userLogin.username
+    username: state.auth.username,
+    nama: state.auth.nama
   };
 };
 

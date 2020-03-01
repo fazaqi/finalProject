@@ -1,8 +1,12 @@
 const INITAL_STATE = {
+  id: "",
+  username: "",
+  password: "",
+  email: "",
   nama: "",
-  alamat: "",
-  jeniskelamin: "",
-  nomorhp: ""
+  roleId: 0,
+  login: false,
+  error: ""
 };
 
 export default (state = INITAL_STATE, action) => {

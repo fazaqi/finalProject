@@ -28,6 +28,7 @@ class App extends Component {
       Axios.get(`${APIURL}user/login/${id}`)
         .then(res => {
           if (res.data.length) {
+            // console.log(res.data[0]);
             this.props.getDataUser(res.data[0]);
           }
         })
@@ -71,8 +72,10 @@ class App extends Component {
 
 const MapstateToprops = state => {
   return {
-    Auth: state.userLogin
+    auth: state.auth
   };
 };
 
 export default connect(MapstateToprops, { getDataUser })(App);
+
+//Loading belum di tengah

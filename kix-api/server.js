@@ -13,8 +13,9 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome to KIX Api");
 });
 
-const { userRoutes } = require("./routes");
+const { logresRoutes, userRoutes } = require("./routes");
 
-app.use("/user", userRoutes);
+app.use("/user", logresRoutes);
+app.use("/manage", userRoutes);
 
 app.listen(PORT, () => console.log("API Active on Port", PORT));

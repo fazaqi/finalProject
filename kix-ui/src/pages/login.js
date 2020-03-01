@@ -10,7 +10,7 @@ import { FaUserCircle, FaLock } from "react-icons/fa";
 
 //Import Tools
 import { connect } from "react-redux";
-import { userLoginAct, clearError } from "../redux/actions";
+import { loginAct, clearError } from "../redux/actions";
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -25,7 +25,7 @@ class Login extends Component {
   onSubmit = () => {
     let username = this.state.username;
     let password = this.state.password;
-    this.props.userLoginAct(username, password);
+    this.props.loginAct(username, password);
   };
 
   //Untuk menghilangkan border biru saat toggle password di klik
@@ -45,7 +45,7 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.userLog) {
+    if (this.props.login) {
       return <Redirect to={"/"} />;
     }
     return (
@@ -118,9 +118,9 @@ class Login extends Component {
 
 const MapstateToprops = state => {
   return {
-    userLog: state.userLogin.login,
-    error: state.userLogin.error
+    login: state.auth.login,
+    error: state.auth.error
   };
 };
 
-export default connect(MapstateToprops, { userLoginAct, clearError })(Login);
+export default connect(MapstateToprops, { loginAct, clearError })(Login);

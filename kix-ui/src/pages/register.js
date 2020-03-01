@@ -9,7 +9,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { FaUserCircle, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-//Tools
+//Utility
 import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
 
