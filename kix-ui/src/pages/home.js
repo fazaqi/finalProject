@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 //Component
 import Navbar from "../components/navbar";
+import Carousel from "../components/homeCarousel";
 
 //Style
 import { Jumbotron, Container, Card } from "react-bootstrap";
@@ -19,76 +20,73 @@ class Homepage extends Component {
     return (
       <div>
         <Navbar />
-        <Jumbotron fluid>
+        <Jumbotron fluid style={{ backgroundColor: "transparent" }}>
           <Container>
-            <h1>Fluid jumbotron</h1>
-            <p>
-              This is a modified jumbotron that occupies the entire horizontal
-              space of its parent.
-            </p>
+            <Carousel />
           </Container>
         </Jumbotron>
         <Fade bottom cascade>
-          <div className="homebanner ">
-            <Card
-              className="bg-dark carrd text-white"
-              style={{ width: "65vh" }}
-            >
-              <Card.Img
-                src={banner1}
-                alt="Card image"
-                style={{ width: "100%", height: "300px" }}
-              />
-              <Card.ImgOverlay>
-                <Card.Title>Casual</Card.Title>
-                {/* <Card.Text>
+          <Container>
+            <div className="homebanner ">
+              <Card
+                className="bg-dark carrd text-white"
+                style={{ width: "35vh" }}
+              >
+                <Card.Img
+                  src={banner1}
+                  alt="Card image"
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <Card.ImgOverlay>
+                  <Card.Title>Casual</Card.Title>
+                  {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
               </Card.Text>
               <Card.Text>Last updated 3 mins ago</Card.Text> */}
-              </Card.ImgOverlay>
-            </Card>
-            <Card
-              className="bg-dark carrd text-white"
-              style={{ width: "65vh" }}
-            >
-              <Card.Img
-                src={banner2}
-                alt="Card image"
-                style={{ width: "100%", height: "300px" }}
-              />
-              <Card.ImgOverlay>
-                <Card.Title>Sneakers</Card.Title>
-                {/* <Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+              <Card
+                className="bg-dark carrd text-white"
+                style={{ width: "35vh" }}
+              >
+                <Card.Img
+                  src={banner2}
+                  alt="Card image"
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <Card.ImgOverlay>
+                  <Card.Title>Sneakers</Card.Title>
+                  {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
               </Card.Text>
               <Card.Text>Last updated 3 mins ago</Card.Text> */}
-              </Card.ImgOverlay>
-            </Card>
-            <Card
-              className="bg-dark carrd text-white"
-              style={{ width: "65vh" }}
-            >
-              <Card.Img
-                src={banner3}
-                alt="Card image"
-                style={{ width: "100%", height: "300px" }}
-              />
-              <Card.ImgOverlay>
-                <Card.Title>Formal</Card.Title>
-                {/* <Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+              <Card
+                className="bg-dark carrd text-white"
+                style={{ width: "35vh" }}
+              >
+                <Card.Img
+                  src={banner3}
+                  alt="Card image"
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <Card.ImgOverlay>
+                  <Card.Title>Formal</Card.Title>
+                  {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
               </Card.Text>
               <Card.Text>Last updated 3 mins ago</Card.Text> */}
-              </Card.ImgOverlay>
-            </Card>
-          </div>
-
+                </Card.ImgOverlay>
+              </Card>
+            </div>
+          </Container>
           <div className="container d-flex productCard">
             <Card className="carrd" style={{ width: "18rem" }}>
               <Card.Img variant="top" src={shoescard} />

@@ -18,6 +18,7 @@ import UserProfile from "./pages/userProfile";
 //Style
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import Tes from "./pages/tes";
 
 class App extends Component {
   state = { loading: true };
@@ -47,8 +48,7 @@ class App extends Component {
     if (this.state.loading) {
       return (
         <Loader
-          className="d-flex"
-          style={{ height: "100vh" }}
+          className="loadspinner"
           type="MutatingDots"
           color="#4ecca3"
           height={100}
@@ -64,6 +64,7 @@ class App extends Component {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/profile" exact component={UserProfile} />
+          <Route path="/test" exact component={Tes} />
         </Switch>
       </Fragment>
     );

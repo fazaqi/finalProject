@@ -31,7 +31,7 @@ module.exports = {
             .status(200)
             .send({ status: "Registrasi User Berhasil", resInsert });
         });
-      }
+      } //KASIH ELSE DISINI JIKA SAAT REGISTER USERNAME ATAU EMAIL SUDAH TERPAKAI
     });
   },
   regisToko: (req, res) => {

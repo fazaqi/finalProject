@@ -17,6 +17,19 @@ body {
   color: red;
 }
 
+/* LOADING SPINNER */
+.loadspinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.nodecor {
+  text-decoration: none !important;
+}
+
 .homebanner {
   display: flex;
   justify-content: space-around;
@@ -111,7 +124,7 @@ body {
 }
 
 .searchBar:focus {
-  width: 90vh;
+  width: 60vh;
   outline-width: 0;
 }
 
@@ -230,4 +243,12 @@ body {
 
 hr.style1 {
   border-top: 1px solid #8c8b8b;
+}
+
+/* GANTI WARNA ARROW CAROUSEL */
+.slick-prev:before {
+  color: black;
+}
+.slick-next:before {
+  color: black;
 }

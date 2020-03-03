@@ -8,10 +8,14 @@ import HeadShake from "react-reveal/HeadShake";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FaUserCircle, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import { Tab, Tabs, TabContainer, Nav } from "react-bootstrap";
 
 //Utility
 import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class Register extends Component {
   state = {
@@ -20,7 +24,8 @@ class Register extends Component {
     repassword: "",
     email: "",
     passerror: false,
-    inputerror: false
+    inputerror: false,
+    toLogin: false
   };
 
   onSubmit = () => {
@@ -38,6 +43,8 @@ class Register extends Component {
       Axios.post(`${APIURL}user/registuser`, { username, password, email })
         .then(res => {
           console.log(res);
+          this.notify();
+          this.setState({ toLogin: true });
         })
         .catch(err => {
           console.log(err);
@@ -57,86 +64,122 @@ class Register extends Component {
     event.preventDefault();
   };
 
+  notify = () => toast.success("Berhasil Daftar");
+
   render() {
+    if (this.props.login) {
+      return <Redirect to="/" />;
+    } else if (this.state.toLogin) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="container regisform">
         <div className="form-group">
           <h2 className="text-center mb-4">Daftar Akun Baru</h2>
-          <Form>
-            {/* Input Username */}
-            <Form.Group>
-              <Form.Label>Username</Form.Label>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <FaUserCircle />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="text"
-                  onChange={e => this.setState({ username: e.target.value })}
-                />
-              </InputGroup>
-            </Form.Group>
 
-            {/* Input Password */}
-            <Form.Group>
-              <Form.Label>Password</Form.Label>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <FaLock />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="password"
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
-              </InputGroup>
-            </Form.Group>
+          <Tab.Container defaultActiveKey="pembeli">
+            <Nav justify variant="pills" className=" mb-3">
+              <Nav.Item>
+                <Nav.Link eventKey="pembeli" className="nodecor">
+                  Daftar Sebagai Pembeli
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="penjual">Daftar Sebagai Penjual</Nav.Link>
+              </Nav.Item>
+            </Nav>
 
-            {/* Input Reenter Password */}
-            <Form.Group>
-              <Form.Label>Re-Enter Password</Form.Label>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <FaLock />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="password"
-                  onChange={e => this.setState({ repassword: e.target.value })}
-                />
-              </InputGroup>
-            </Form.Group>
+            <Tab.Content>
+              {/* ========= REGISTER PEMBELI ========= */}
+              <Tab.Pane eventKey="pembeli">
+                <Form>
+                  {/* Input Username */}
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaUserCircle />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="text"
+                        onChange={e =>
+                          this.setState({ username: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
 
-            {/* Input Email */}
-            <Form.Group>
-              <Form.Label>Email</Form.Label>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <MdEmail />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="email"
-                  onChange={e => this.setState({ email: e.target.value })}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form>
+                  {/* Input Password */}
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaLock />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="password"
+                        onChange={e =>
+                          this.setState({ password: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
 
-          {/* Button Register */}
-          <Button
-            className="mt-4 btnlogin"
-            onClick={this.onSubmit}
-            onMouseDown={this.handleDefault}
-            size="lg"
-          >
-            Daftar
-          </Button>
+                  {/* Input Reenter Password */}
+                  <Form.Group>
+                    <Form.Label>Re-Enter Password</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaLock />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="password"
+                        onChange={e =>
+                          this.setState({ repassword: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
+
+                  {/* Input Email */}
+                  <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <MdEmail />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="email"
+                        onChange={e => this.setState({ email: e.target.value })}
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Form>
+
+                {/* Button Register */}
+                <Button
+                  className="mt-4 btnlogin"
+                  onClick={this.onSubmit}
+                  onMouseDown={this.handleDefault}
+                  size="lg"
+                >
+                  Daftar
+                </Button>
+              </Tab.Pane>
+              {/* ========= REGISTER PENJUAL ========= */}
+              <Tab.Pane eventKey="penjual">
+                <h1>Toko</h1>
+              </Tab.Pane>
+            </Tab.Content>
+          </Tab.Container>
         </div>
 
         {/* Alert Error */}
@@ -165,12 +208,31 @@ class Register extends Component {
             </Alert>
           </HeadShake>
         ) : null}
+
+        {/* SUCCESS TOAST */}
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover={false}
+        />
       </div>
     );
   }
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    login: state.auth.login
+  };
+};
+
+export default connect(mapStateToProps)(Register);
 
 //Belom ada alert kalo berhasil
-//Redirect ke login page setelah berhasil
+//Redirect ke login berhasil tapi toast gak keluar
