@@ -6,10 +6,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import HeadShake from "react-reveal/HeadShake";
 import InputGroup from "react-bootstrap/InputGroup";
-import { FaUserCircle, FaLock } from "react-icons/fa";
+import { FaUserCircle, FaLock, FaStore } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
-import { Tab, Tabs, TabContainer, Nav } from "react-bootstrap";
+import { Tab, Nav } from "react-bootstrap";
 
 //Utility
 import Axios from "axios";
@@ -17,16 +17,19 @@ import { APIURL } from "../helper/apiUrl";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+const initial_state = {
+  username: "",
+  namatoko: "",
+  password: "",
+  repassword: "",
+  email: "",
+  passerror: false,
+  inputerror: false,
+  toLogin: false
+};
+
 class Register extends Component {
-  state = {
-    username: "",
-    password: "",
-    repassword: "",
-    email: "",
-    passerror: false,
-    inputerror: false,
-    toLogin: false
-  };
+  state = initial_state;
 
   onSubmit = () => {
     let { username, password, repassword, email } = this.state;
@@ -44,7 +47,34 @@ class Register extends Component {
         .then(res => {
           console.log(res);
           this.notify();
-          this.setState({ toLogin: true });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
+  onSubmitToko = () => {
+    let { username, password, repassword, email, namatoko } = this.state;
+    if (
+      username === "" ||
+      password === "" ||
+      repassword === "" ||
+      email === ""
+    ) {
+      this.setState({ inputerror: true });
+    } else if (password !== repassword) {
+      this.setState({ passerror: true });
+    } else if ((username, password, repassword, email)) {
+      Axios.post(`${APIURL}user/registtoko`, {
+        username,
+        password,
+        email,
+        namatoko
+      })
+        .then(res => {
+          console.log(res);
+          this.notify();
         })
         .catch(err => {
           console.log(err);
@@ -64,7 +94,12 @@ class Register extends Component {
     event.preventDefault();
   };
 
-  notify = () => toast.success("Berhasil Daftar");
+  notify = () => {
+    toast.success("Berhasil Daftar");
+    this.setState({ toLogin: true });
+  };
+
+  reset = () => this.setState(initial_state);
 
   render() {
     if (this.props.login) {
@@ -79,12 +114,12 @@ class Register extends Component {
 
           <Tab.Container defaultActiveKey="pembeli">
             <Nav justify variant="pills" className=" mb-3">
-              <Nav.Item>
+              <Nav.Item onClick={this.reset}>
                 <Nav.Link eventKey="pembeli" className="nodecor">
                   Daftar Sebagai Pembeli
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item onClick={this.reset}>
                 <Nav.Link eventKey="penjual">Daftar Sebagai Penjual</Nav.Link>
               </Nav.Item>
             </Nav>
@@ -104,6 +139,7 @@ class Register extends Component {
                       </InputGroup.Prepend>
                       <Form.Control
                         type="text"
+                        value={this.state.username}
                         onChange={e =>
                           this.setState({ username: e.target.value })
                         }
@@ -122,6 +158,7 @@ class Register extends Component {
                       </InputGroup.Prepend>
                       <Form.Control
                         type="password"
+                        value={this.state.password}
                         onChange={e =>
                           this.setState({ password: e.target.value })
                         }
@@ -140,6 +177,7 @@ class Register extends Component {
                       </InputGroup.Prepend>
                       <Form.Control
                         type="password"
+                        value={this.state.repassword}
                         onChange={e =>
                           this.setState({ repassword: e.target.value })
                         }
@@ -158,6 +196,7 @@ class Register extends Component {
                       </InputGroup.Prepend>
                       <Form.Control
                         type="email"
+                        value={this.state.email}
                         onChange={e => this.setState({ email: e.target.value })}
                       />
                     </InputGroup>
@@ -176,7 +215,109 @@ class Register extends Component {
               </Tab.Pane>
               {/* ========= REGISTER PENJUAL ========= */}
               <Tab.Pane eventKey="penjual">
-                <h1>Toko</h1>
+                <Form>
+                  {/* Input Nama Toko */}
+                  <Form.Group>
+                    <Form.Label>Nama Toko</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaStore />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="text"
+                        value={this.state.namatoko}
+                        onChange={e =>
+                          this.setState({ namatoko: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                  {/* Input Username */}
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaUserCircle />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="text"
+                        value={this.state.username}
+                        onChange={e =>
+                          this.setState({ username: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
+
+                  {/* Input Password */}
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaLock />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="password"
+                        value={this.state.password}
+                        onChange={e =>
+                          this.setState({ password: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
+
+                  {/* Input Reenter Password */}
+                  <Form.Group>
+                    <Form.Label>Re-Enter Password</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <FaLock />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="password"
+                        value={this.state.repassword}
+                        onChange={e =>
+                          this.setState({ repassword: e.target.value })
+                        }
+                      />
+                    </InputGroup>
+                  </Form.Group>
+
+                  {/* Input Email */}
+                  <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Prepend>
+                        <InputGroup.Text>
+                          <MdEmail />
+                        </InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <Form.Control
+                        type="email"
+                        value={this.state.email}
+                        onChange={e => this.setState({ email: e.target.value })}
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Form>
+
+                {/* Button Register */}
+                <Button
+                  className="mt-4 btnlogin"
+                  onClick={this.onSubmitToko}
+                  onMouseDown={this.handleDefault}
+                  size="lg"
+                >
+                  Daftar
+                </Button>
               </Tab.Pane>
             </Tab.Content>
           </Tab.Container>
@@ -236,3 +377,4 @@ export default connect(mapStateToProps)(Register);
 
 //Belom ada alert kalo berhasil
 //Redirect ke login berhasil tapi toast gak keluar
+//Saat pindah tab clear inputnya

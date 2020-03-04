@@ -9,9 +9,9 @@ import { Jumbotron, Container, Card } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 
 //Image
-import banner1 from "../support/banner/patu-01.png";
-import banner2 from "../support/banner/patu-02.png";
-import banner3 from "../support/banner/patu-03.png";
+import banner1 from "../support/banner/casual.png";
+import banner2 from "../support/banner/sneakers.png";
+import banner3 from "../support/banner/formal.png";
 import shoescard from "./../support/1.png";
 
 class Homepage extends Component {
@@ -20,7 +20,13 @@ class Homepage extends Component {
     return (
       <div>
         <Navbar />
-        <Jumbotron fluid style={{ backgroundColor: "transparent" }}>
+        <Jumbotron
+          fluid
+          style={{
+            backgroundColor: "transparent",
+            height: "30vh"
+          }}
+        >
           <Container>
             <Carousel />
           </Container>
@@ -30,7 +36,7 @@ class Homepage extends Component {
             <div className="homebanner ">
               <Card
                 className="bg-dark carrd text-white"
-                style={{ width: "35vh" }}
+                style={{ width: "35vh", border: "transparent" }}
               >
                 <Card.Img
                   src={banner1}
@@ -38,7 +44,7 @@ class Homepage extends Component {
                   style={{ width: "100%", height: "100%" }}
                 />
                 <Card.ImgOverlay>
-                  <Card.Title>Casual</Card.Title>
+                  {/* <Card.Title>Casual</Card.Title> */}
                   {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
@@ -49,7 +55,7 @@ class Homepage extends Component {
               </Card>
               <Card
                 className="bg-dark carrd text-white"
-                style={{ width: "35vh" }}
+                style={{ width: "35vh", border: "transparent" }}
               >
                 <Card.Img
                   src={banner2}
@@ -57,7 +63,7 @@ class Homepage extends Component {
                   style={{ width: "100%", height: "100%" }}
                 />
                 <Card.ImgOverlay>
-                  <Card.Title>Sneakers</Card.Title>
+                  {/* <Card.Title>Sneakers</Card.Title> */}
                   {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
@@ -68,7 +74,7 @@ class Homepage extends Component {
               </Card>
               <Card
                 className="bg-dark carrd text-white"
-                style={{ width: "35vh" }}
+                style={{ width: "35vh", border: "transparent" }}
               >
                 <Card.Img
                   src={banner3}
@@ -76,7 +82,7 @@ class Homepage extends Component {
                   style={{ width: "100%", height: "100%" }}
                 />
                 <Card.ImgOverlay>
-                  <Card.Title>Formal</Card.Title>
+                  {/* <Card.Title>Formal</Card.Title> */}
                   {/* <Card.Text>
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit

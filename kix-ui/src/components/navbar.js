@@ -21,6 +21,10 @@ class Header extends Component {
     this.props.logoutAct();
   };
 
+  handleDefault = event => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div>
@@ -59,7 +63,7 @@ class Header extends Component {
                 </Nav>
               ) : (
                 <Nav className="ml-auto">
-                  <Button variant="light">
+                  <Button variant="light" onMouseDown={this.handleDefault}>
                     <FiShoppingCart
                       style={{ fontSize: "20px" }}
                       className="d-inline-block"

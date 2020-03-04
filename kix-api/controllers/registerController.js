@@ -35,7 +35,7 @@ module.exports = {
     });
   },
   regisToko: (req, res) => {
-    const { username, password, email } = req.body;
+    const { username, password, email, namatoko } = req.body;
     const hashpassword = crypto(password);
     var sql = `SELECT * FROM users WHERE username='${username}' OR email='${email}'`;
     db.query(sql, (err, result) => {
@@ -52,6 +52,7 @@ module.exports = {
           if (err) res.status(500).send({ status: "Insert Error", err });
           sql = `INSERT INTO users_penjual SET ?`;
           let dataUser = {
+            namatoko,
             email,
             usersId: resInsert.insertId
           };
@@ -63,7 +64,7 @@ module.exports = {
             .status(200)
             .send({ status: "Registrasi Toko Berhasil", resInsert });
         });
-      }
+      } //KASIH ELSE DISINI JIKA SAAT REGISTER USERNAME ATAU EMAIL SUDAH TERPAKAI
     });
   }
 };

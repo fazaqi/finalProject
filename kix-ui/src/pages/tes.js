@@ -13,10 +13,13 @@ import {
 } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 
+const initial_state = { a: 0, b: 0 };
+
 class Tes extends Component {
-  state = {};
+  state = initial_state;
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <Container>
@@ -69,6 +72,10 @@ class Tes extends Component {
             </Row>
           </Tab.Container>
         </Container>
+        <button onClick={() => this.setState({ a: this.state.a + 1 })}>
+          asd
+        </button>
+        <button onClick={() => this.setState(initial_state)}>reset</button>
       </div>
     );
   }
