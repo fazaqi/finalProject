@@ -3,15 +3,14 @@ import React, { Component } from "react";
 //Component
 import Navbar from "../components/navbar";
 import Carousel from "../components/homeCarousel";
+import Banner from "../components/banner";
+import Footer from "../components/footer";
+import HomeCard from "../components/homeCard";
 
 //Style
-import { Jumbotron, Container, Card } from "react-bootstrap";
-import Fade from "react-reveal/Fade";
+import { Jumbotron, Card } from "react-bootstrap";
 
 //Image
-import banner1 from "../support/banner/casual.png";
-import banner2 from "../support/banner/sneakers.png";
-import banner3 from "../support/banner/formal.png";
 import shoescard from "./../support/1.png";
 
 class Homepage extends Component {
@@ -20,150 +19,23 @@ class Homepage extends Component {
     return (
       <div>
         <Navbar />
+
         <Jumbotron
           fluid
           style={{
             backgroundColor: "transparent",
-            height: "30vh"
+            height: "50vh"
           }}
         >
-          <Container>
-            <Carousel />
-          </Container>
+          <Carousel />
         </Jumbotron>
-        <Fade bottom cascade>
-          <Container>
-            <div className="homebanner ">
-              <Card
-                className="bg-dark carrd text-white"
-                style={{ width: "35vh", border: "transparent" }}
-              >
-                <Card.Img
-                  src={banner1}
-                  alt="Card image"
-                  style={{ width: "100%", height: "100%" }}
-                />
-                <Card.ImgOverlay>
-                  {/* <Card.Title>Casual</Card.Title> */}
-                  {/* <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text> */}
-                </Card.ImgOverlay>
-              </Card>
-              <Card
-                className="bg-dark carrd text-white"
-                style={{ width: "35vh", border: "transparent" }}
-              >
-                <Card.Img
-                  src={banner2}
-                  alt="Card image"
-                  style={{ width: "100%", height: "100%" }}
-                />
-                <Card.ImgOverlay>
-                  {/* <Card.Title>Sneakers</Card.Title> */}
-                  {/* <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text> */}
-                </Card.ImgOverlay>
-              </Card>
-              <Card
-                className="bg-dark carrd text-white"
-                style={{ width: "35vh", border: "transparent" }}
-              >
-                <Card.Img
-                  src={banner3}
-                  alt="Card image"
-                  style={{ width: "100%", height: "100%" }}
-                />
-                <Card.ImgOverlay>
-                  {/* <Card.Title>Formal</Card.Title> */}
-                  {/* <Card.Text>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </Card.Text>
-              <Card.Text>Last updated 3 mins ago</Card.Text> */}
-                </Card.ImgOverlay>
-              </Card>
-            </div>
-          </Container>
-          <div className="container d-flex productCard">
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card className="carrd" style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={shoescard} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-        </Fade>
+
+        <Banner />
+
+        <HomeCard />
+
         <Jumbotron fluid className="foooter">
-          <Container>
-            <h1>Fluid jumbotron</h1>
-            <p>
-              This is a modified jumbotron that occupies the entire horizontal
-              space of its parent.
-            </p>
-          </Container>
+          <Footer />
         </Jumbotron>
       </div>
     );
