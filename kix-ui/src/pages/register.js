@@ -113,7 +113,7 @@ class Register extends Component {
           <h2 className="text-center mb-4">Daftar Akun Baru</h2>
 
           <Tab.Container defaultActiveKey="pembeli">
-            <Nav justify variant="pills" className=" mb-3">
+            <Nav justify variant="tabs" className=" mb-3">
               <Nav.Item onClick={this.reset}>
                 <Nav.Link eventKey="pembeli" className="nodecor">
                   Daftar Sebagai Pembeli

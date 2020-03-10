@@ -3,7 +3,7 @@ const INITAL_STATE = {
   username: "",
   password: "",
   email: "",
-  nama: "",
+  // nama: "",
   roleId: 0,
   login: false,
   error: ""

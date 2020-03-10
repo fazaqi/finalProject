@@ -3,8 +3,14 @@ const crypto = require("./../helper/encrypt");
 
 module.exports = {
   getDetailUser: (req, res) => {
-    const { id } = req.params;
-    var sql = `SELECT * FROM users_pembeli WHERE usersId=${id}`;
+    const { id, role } = req.body;
+    // console.log(id, role);
+    var sql = "";
+    if (role === 2) {
+      sql = `SELECT * FROM users_penjual WHERE usersId=${id}`;
+    } else if (role === 3) {
+      sql = `SELECT * FROM users_pembeli WHERE usersId=${id}`;
+    }
     db.query(sql, (err, result) => {
       if (err) res.status(500).send({ status: "error", err });
       return res.status(200).send(result);

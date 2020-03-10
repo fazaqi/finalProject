@@ -7,11 +7,11 @@ import {
   Col,
   Nav,
   Tab,
-  Tabs,
-  TabContainer,
+  // Tabs,
+  // TabContainer,
   Container
 } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 
 const initial_state = { a: 0, b: 0 };
 
@@ -72,7 +72,7 @@ class Tes extends Component {
             </Row>
           </Tab.Container>
         </Container>
-        <button onClick={() => this.setState({ a: this.state.a + 1 })}>
+        <button onClick={() => this.setState({ a: this.state.a + 1, c: 1 })}>
           asd
         </button>
         <button onClick={() => this.setState(initial_state)}>reset</button>

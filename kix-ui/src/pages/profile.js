@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 //Component
-import Navbar from "./../components/navbar";
+import Navbar from "../components/navbar";
 import userimg from "../support/user.svg";
 
 //Style
@@ -15,20 +15,29 @@ import { connect } from "react-redux";
 import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
 
-class UserProfile extends Component {
+class Profile extends Component {
   state = {
-    nama: "",
-    nomorhp: "",
-    alamat: "",
-    jeniskelamin: null
+    // nama: "",
+    // nomorhp: "",
+    // alamat: ""
+    // jeniskelamin: null
   };
 
   componentDidMount() {
-    Axios.get(`${APIURL}manage/getuser/${this.props.id}`)
+    const { id, role } = this.props;
+    console.log(id, role);
+    Axios.post(`${APIURL}manage/getuser`, { id, role })
       .then(res => {
-        let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
-        this.setState({ nama, nomorhp, alamat, jeniskelamin });
-        console.log(this.state.jeniskelamin);
+        // if (role === 2) {
+        //   let {}
+        // }else if (role === 3) {
+        //   let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
+        //   let data = {nama,nomorhp,alamat, jeniskelamin}
+        // }
+        // console.log(res.data[0]);
+        // this.setState({ nama, nomorhp, alamat, jeniskelamin });
+        this.setState(res.data[0]);
+        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
@@ -299,7 +308,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps)(Profile);
 
 //Defaultvalue jenis kelamin belom bisa
 //Belum ada Proteksi jika ada yang kosong

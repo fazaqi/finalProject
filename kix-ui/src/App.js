@@ -12,7 +12,7 @@ import { getDataUser } from "./redux/actions";
 import Login from "./pages/login";
 import Homepage from "./pages/home";
 import Register from "./pages/register";
-import UserProfile from "./pages/userProfile";
+import Profile from "./pages/profile";
 // import Header from "./components/navbar";
 
 //Style
@@ -63,7 +63,7 @@ class App extends Component {
           <Route path="/" exact component={Homepage} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/profile" exact component={UserProfile} />
+          <Route path="/profile" exact component={Profile} />
           <Route path="/test" exact component={Tes} />
         </Switch>
       </Fragment>
