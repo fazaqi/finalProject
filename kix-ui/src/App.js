@@ -13,7 +13,6 @@ import Login from "./pages/login";
 import Homepage from "./pages/home";
 import Register from "./pages/register";
 import Profile from "./pages/profile";
-// import Header from "./components/navbar";
 
 //Style
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -58,7 +57,6 @@ class App extends Component {
     }
     return (
       <Fragment>
-        {/* <Header /> */}
         <Switch>
           <Route path="/" exact component={Homepage} />
           <Route path="/login" exact component={Login} />

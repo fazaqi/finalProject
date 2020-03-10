@@ -4,7 +4,7 @@ const crypto = require("./../helper/encrypt");
 module.exports = {
   getDetailUser: (req, res) => {
     const { id, role } = req.body;
-    // console.log(id, role);
+    console.log(id, role);
     var sql = "";
     if (role === 2) {
       sql = `SELECT * FROM users_penjual WHERE usersId=${id}`;
@@ -13,24 +13,33 @@ module.exports = {
     }
     db.query(sql, (err, result) => {
       if (err) res.status(500).send({ status: "error", err });
+      console.log(result);
       return res.status(200).send(result);
     });
   },
   updateUser: (req, res) => {
     const { id } = req.params;
-    const { username, nama, alamat, jeniskelamin, nomorhp } = req.body;
-    var sql = `SELECT * FROM users WHERE username='${username}'`;
-    db.query(sql, (err, result) => {
-      if (err) res.status(500).send({ status: "error", err });
+    const { nama, alamat, jeniskelamin, nomorhp } = req.body;
+    let data = { nama, alamat, jeniskelamin, nomorhp };
+    let sql = `UPDATE users_pembeli SET ? WHERE usersId = ${id}`;
+    db.query(sql, data, (err, result) => {
+      if (err) res.status(500).send({ status: "Insert Error", err });
+      // console.log(result);
       if (result) {
-        let data = { nama, alamat, jeniskelamin, nomorhp };
-        sql = `UPDATE users_pembeli SET ? WHERE usersId = ${id}`;
-        db.query(sql, data, (err, resUpdate) => {
-          if (err) res.status(500).send({ status: "Insert Error", err });
-          return res
-            .status(200)
-            .send({ status: "Update Data Berhasil", resUpdate });
-        });
+        return res.status(200).send({ status: "Update Data Berhasil", result });
+      }
+    });
+  },
+  updateToko: (req, res) => {
+    const { id } = req.params;
+    const { namatoko, nomorhp, alamattoko, deskripsitoko } = req.body;
+    let data = { namatoko, nomorhp, alamattoko, deskripsitoko };
+    let sql = `UPDATE users_penjual SET ? WHERE usersId = ${id}`;
+    db.query(sql, data, (err, result) => {
+      if (err) res.status(500).send({ status: "Insert Error", err });
+      // console.log(result);
+      if (result) {
+        return res.status(200).send({ status: "Update Data Berhasil", result });
       }
     });
   }

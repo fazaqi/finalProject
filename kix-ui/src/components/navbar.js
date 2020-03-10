@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 
 // Import Style
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  Container,
-  Button,
-  Badge
-} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Form, Button, Badge } from "react-bootstrap";
 
 // Icons
 import { FiShoppingCart } from "react-icons/fi";
@@ -79,13 +71,17 @@ class Header extends Component {
                     variant="danger"
                     style={{ fontSize: "70%", verticalAlign: "top" }}
                   >
-                    6
+                    0
                   </Badge>
                 </Button>
                 <div className="leftBorderDiv"></div>
                 <NavDropdown
                   alignRight
-                  title={this.props.nama || this.props.username}
+                  title={
+                    this.props.nama.nama ||
+                    this.props.nama.namatoko ||
+                    this.props.username
+                  }
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
@@ -111,7 +107,7 @@ class Header extends Component {
 const MapstateToprops = state => {
   return {
     username: state.auth.username,
-    nama: state.auth.nama
+    nama: state.auth
   };
 };
 

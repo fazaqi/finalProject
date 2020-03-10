@@ -30,14 +30,6 @@ body {
   text-decoration: none !important;
 }
 
-.homebanner {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 250px;
-}
-
 .productCard {
   margin-top: 150px;
   margin-bottom: 150px;
@@ -55,6 +47,28 @@ body {
   transition: width 0.9s ease-in-out !important;
 } */
 
+/* BANNER */
+.homebanner {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+  /* width: 100%; */
+  height: 250px;
+}
+
+.bannerimg {
+  transition: 200ms;
+  /* width: 100%; */
+  /* height: 100%; */
+}
+
+.bannerimg:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  /* overflow: hidden; */
+}
+
 .carrd:hover {
   cursor: pointer !important;
   position: relative;
@@ -64,6 +78,7 @@ body {
 .bannerCard {
   overflow: hidden;
 }
+/* =============== */
 
 .loginform {
   border: 1px solid rgba(0, 0, 0, 0.068);
@@ -105,7 +120,7 @@ body {
 }
 
 .foooter {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .searchBar {
@@ -137,13 +152,42 @@ body {
 
 /* CAROUSEL */
 .homecarousel {
-  margin-top: 2%;
+  /* margin-top: 0; */
+  /* padding: 0; */
   margin-left: 4%;
   margin-right: 4%;
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
 }
 
+.slick-active {
+  padding: 20px 0;
+}
+
+.slick-center {
+  transform: scale(1.08);
+}
+
+.slick-slide:not(.slick-active) {
+  margin: 20px 0;
+}
+
+.child {
+  width: 100%;
+}
+
+.slide:not(.slick-active) {
+  cursor: pointer;
+}
 /* ================ */
+
+/* GANTI WARNA ARROW CAROUSEL */
+.slick-prev:before {
+  color: #4ecca3;
+}
+.slick-next:before {
+  color: #4ecca3;
+}
+/* ============================== */
 
 /* HALAMAN PROFIL */
 
@@ -256,15 +300,6 @@ hr.style1 {
 }
 /* ============================ */
 
-/* GANTI WARNA ARROW CAROUSEL */
-.slick-prev:before {
-  color: #4ecca3;
-}
-.slick-next:before {
-  color: #4ecca3;
-}
-/* ============================== */
-
 /* FOOTER */
 
 .footer-section {
@@ -277,17 +312,24 @@ hr.style1 {
 }
 
 .footer-left .footer-logo {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 800;
 }
 
 .footer-left .footer-logo a {
   display: inline-block;
 }
 
+.footer-left ul {
+  margin: 0;
+  padding: 0;
+}
+
 .footer-left ul li {
   list-style: none;
   color: black;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 30px;
   /* border: 1px solid black; */
 }
@@ -342,14 +384,20 @@ hr.style1 {
   margin-bottom: 26px;
 }
 
+.footer-widget ul {
+  margin: 0;
+  padding: 0;
+}
+
 .footer-widget ul li {
   list-style: none;
 }
 
 .footer-widget ul li a {
   line-height: 36px;
-  font-size: 16px;
+  font-size: 14px;
   color: black;
+  text-decoration: none;
 }
 
 .newslatter-item h5 {
@@ -372,7 +420,7 @@ hr.style1 {
   background: #303030;
   width: 100%;
   height: 46px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   padding-left: 20px;
 }

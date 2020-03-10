@@ -8,35 +8,40 @@ import Footer from "../components/footer";
 import HomeCard from "../components/homeCard";
 
 //Style
-import { Jumbotron, Card } from "react-bootstrap";
-
-//Image
-import shoescard from "./../support/1.png";
+import { Jumbotron, Container } from "react-bootstrap";
 
 class Homepage extends Component {
   state = {};
   render() {
     return (
       <div>
+        {/* NAVBAR */}
         <Navbar />
 
+        {/* CAROUSEL */}
         <Jumbotron
           fluid
           style={{
             backgroundColor: "transparent",
-            height: "50vh"
+            height: "50vh",
+            // border: "1px solid red",
+            paddingTop: "1rem",
+            paddingBottom: "1rem"
           }}
         >
           <Carousel />
         </Jumbotron>
 
+        {/* BANNER */}
         <Banner />
 
-        <HomeCard />
+        {/* PRODUCTCARD */}
+        <Container>
+          <HomeCard />
+        </Container>
 
-        <Jumbotron fluid className="foooter">
-          <Footer />
-        </Jumbotron>
+        {/* FOOTER */}
+        <Footer />
       </div>
     );
   }

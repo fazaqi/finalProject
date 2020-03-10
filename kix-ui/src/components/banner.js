@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import banner1 from "../support/banner/casual.png";
 import banner2 from "../support/banner/sneakers.png";
 import banner3 from "../support/banner/formal.png";
-import { Container, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 class Banner extends Component {
   state = {
@@ -14,13 +14,14 @@ class Banner extends Component {
       return (
         <Card
           key={index}
-          className="bg-dark carrd text-white"
-          style={{ width: "35vh", border: "transparent" }}
+          className="bg-dark bannerimg text-white"
+          style={{ width: "380px", height: "245px", border: "transparent" }}
         >
           <Card.Img
             src={val}
             alt="Card image"
             style={{ width: "100%", height: "100%" }}
+            // className="bannerimg"
           />
           <Card.ImgOverlay>
             {/* <Card.Title>Casual</Card.Title> */}
@@ -37,11 +38,7 @@ class Banner extends Component {
   };
 
   render() {
-    return (
-      // <Container>
-      <div className="homebanner ">{this.renderItem()}</div>
-      // </Container>
-    );
+    return <div className="homebanner">{this.renderItem()}</div>;
   }
 }
 

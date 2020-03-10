@@ -3,17 +3,17 @@ import React, { Component } from "react";
 //Component
 import Navbar from "../components/navbar";
 import userimg from "../support/user.svg";
+import UserProfile from "../components/user/userProfile";
+import SellerProfile from "../components/seller/sellerProfile";
+import Footer from "../components/footer";
 
 //Style
-import { Form, Row, Col, Button, Tab, Badge } from "react-bootstrap";
+import { Tab, Badge } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
-import { ToastContainer, toast } from "react-toastify";
 
 //Utility
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Axios from "axios";
-import { APIURL } from "../helper/apiUrl";
 
 class Profile extends Component {
   state = {
@@ -23,53 +23,53 @@ class Profile extends Component {
     // jeniskelamin: null
   };
 
-  componentDidMount() {
-    const { id, role } = this.props;
-    console.log(id, role);
-    Axios.post(`${APIURL}manage/getuser`, { id, role })
-      .then(res => {
-        // if (role === 2) {
-        //   let {}
-        // }else if (role === 3) {
-        //   let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
-        //   let data = {nama,nomorhp,alamat, jeniskelamin}
-        // }
-        // console.log(res.data[0]);
-        // this.setState({ nama, nomorhp, alamat, jeniskelamin });
-        this.setState(res.data[0]);
-        console.log(this.state);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  // componentDidMount() {
+  //   const { id, role } = this.props;
+  //   console.log(id, role);
+  //   Axios.post(`${APIURL}manage/getuser`, { id, role })
+  //     .then(res => {
+  //       // if (role === 2) {
+  //       //   let {}
+  //       // }else if (role === 3) {
+  //       //   let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
+  //       //   let data = {nama,nomorhp,alamat, jeniskelamin}
+  //       // }
+  //       // console.log(res.data[0]);
+  //       // this.setState({ nama, nomorhp, alamat, jeniskelamin });
+  //       this.setState(res.data[0]);
+  //       console.log(this.state);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
-  notify = () => toast.success("Data Berhasil Diubah.");
+  // notify = () => toast.success("Data Berhasil Diubah.");
 
-  btnSimpan = () => {
-    let nama = this.refs.nama.value;
-    let nomorhp = this.refs.hp.value;
-    let alamat = this.refs.alamat.value;
-    let jeniskelamin = "";
+  // btnSimpan = () => {
+  //   let nama = this.refs.nama.value;
+  //   let nomorhp = this.refs.hp.value;
+  //   let alamat = this.refs.alamat.value;
+  //   let jeniskelamin = "";
 
-    if (this.refs.jkp.checked) {
-      jeniskelamin = "Pria";
-    } else if (this.refs.jkw.checked) {
-      jeniskelamin = "Wanita";
-    }
+  //   if (this.refs.jkp.checked) {
+  //     jeniskelamin = "Pria";
+  //   } else if (this.refs.jkw.checked) {
+  //     jeniskelamin = "Wanita";
+  //   }
 
-    let data = { nama, alamat, jeniskelamin, nomorhp };
-    console.log(data);
+  //   let data = { nama, alamat, jeniskelamin, nomorhp };
+  //   console.log(data);
 
-    Axios.put(`${APIURL}manage/updateuser/${this.props.id}`, data)
-      .then(res => {
-        console.log(res);
-        this.notify();
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  //   Axios.put(`${APIURL}manage/updateuser/${this.props.id}`, data)
+  //     .then(res => {
+  //       console.log(res);
+  //       this.notify();
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   render() {
     if (this.props.login) {
@@ -94,10 +94,14 @@ class Profile extends Component {
                     {/* SIDEBAR USER TITLE */}
                     <div className="profile-usertitle">
                       <div className="profile-usertitle-name">
-                        {this.props.nama}
+                        {this.props.nama.nama || this.props.nama.namatoko}
                       </div>
                       <div className="profile-usertitle-job">
-                        {this.props.role === 3 ? "USER" : null}
+                        {this.props.role === 3
+                          ? "USER"
+                          : this.props.role === 2
+                          ? "SELLER"
+                          : null}
                       </div>
                     </div>
                     {/* END SIDEBAR USER TITLE */}
@@ -143,132 +147,13 @@ class Profile extends Component {
                 <div className="col-md-9">
                   <Tab.Content>
                     <Tab.Pane eventKey="profil">
-                      <div className="profile-content">
-                        <h2 className="kix mb-5">Profil</h2>
-                        <Form>
-                          {/* NAMA LENGKAP */}
-                          <Form.Group as={Row}>
-                            <Form.Label column sm={2}>
-                              Nama Lengkap<span className="redstar">*</span>
-                            </Form.Label>
-                            <Col sm={10}>
-                              <Form.Control
-                                type="text"
-                                ref="nama"
-                                defaultValue={this.state.nama}
-                              />
-                            </Col>
-                          </Form.Group>
-
-                          {/* EMAIL */}
-                          <Form.Group as={Row} controlId="formHorizontalEmail">
-                            <Form.Label column sm={2}>
-                              Email
-                            </Form.Label>
-                            <Col sm={10}>
-                              <Form.Control
-                                plaintext
-                                readOnly
-                                defaultValue={this.props.email}
-                              />
-                            </Col>
-                          </Form.Group>
-
-                          {/* JENIS KELAMIN */}
-                          <fieldset>
-                            <Form.Group as={Row}>
-                              <Form.Label as="legend" column sm={2}>
-                                Jenis Kelamin
-                              </Form.Label>
-                              <Col sm={10} className="mt-1">
-                                <Form.Check
-                                  inline
-                                  label="Pria"
-                                  ref="jkp"
-                                  type="radio"
-                                  name="jeniskelamin"
-                                  defaultChecked={
-                                    this.state.jeniskelamin === "Pria"
-                                      ? true
-                                      : false
-                                  }
-                                />
-                                <Form.Check
-                                  inline
-                                  label="Wanita"
-                                  ref="jkw"
-                                  type="radio"
-                                  name="jeniskelamin"
-                                  defaultChecked={
-                                    this.state.jeniskelamin === "Wanita"
-                                      ? true
-                                      : false
-                                  }
-                                />
-                              </Col>
-                            </Form.Group>
-                          </fieldset>
-
-                          {/* NO HP */}
-                          <Form.Group
-                            as={Row}
-                            controlId="formHorizontalPassword"
-                          >
-                            <Form.Label column sm={2}>
-                              Nomor HP<span className="redstar">*</span>
-                            </Form.Label>
-                            <Col sm={10}>
-                              <Form.Control
-                                type="text"
-                                ref="hp"
-                                defaultValue={this.state.nomorhp}
-                              />
-                            </Col>
-                          </Form.Group>
-
-                          {/* ALAMAT */}
-                          <Form.Group
-                            as={Row}
-                            controlId="exampleForm.ControlTextarea1"
-                          >
-                            <Form.Label column sm={2}>
-                              Alamat<span className="redstar">*</span>
-                            </Form.Label>
-                            <Col sm={10}>
-                              <Form.Control
-                                as="textarea"
-                                rows="5"
-                                ref="alamat"
-                                defaultValue={this.state.alamat}
-                              />
-                            </Col>
-                          </Form.Group>
-
-                          {/* BUTTON SIMPAN */}
-                          <Form.Group as={Row}>
-                            <Col sm={{ span: 10, offset: 2 }}>
-                              <Button
-                                type="button"
-                                onClick={this.btnSimpan}
-                                size="lg"
-                              >
-                                Simpan
-                              </Button>
-                            </Col>
-                          </Form.Group>
-                        </Form>
-                        <ToastContainer
-                          position="bottom-right"
-                          autoClose={2500}
-                          hideProgressBar={false}
-                          newestOnTop={false}
-                          closeOnClick
-                          rtl={false}
-                          pauseOnVisibilityChange
-                          draggable={false}
-                          pauseOnHover={false}
-                        />
-                      </div>
+                      {/* USER PROFILE / SELLER PROFILE */}
+                      {this.props.role === 3 ? (
+                        <UserProfile />
+                      ) : this.props.role === 2 ? (
+                        <SellerProfile />
+                      ) : null}
+                      {/* <UserProfile /> */}
                     </Tab.Pane>
                     <Tab.Pane eventKey="dua">
                       <h1>Dua</h1>
@@ -290,6 +175,7 @@ class Profile extends Component {
               </div>
             </Tab.Container>
           </div>
+          <Footer />
         </div>
       );
     } else {
@@ -301,9 +187,7 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     login: state.auth.login,
-    email: state.auth.email,
-    id: state.auth.id,
-    nama: state.auth.nama,
+    nama: state.auth,
     role: state.auth.roleId
   };
 };

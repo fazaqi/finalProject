@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 // Import Style
 import Slider from "react-slick";
-import { Container } from "react-bootstrap";
 
 // Import Gambar
 import banner1 from "../support/banner-carousel/1.png";
@@ -19,15 +18,17 @@ class Carousel extends Component {
   renderItem = () => {
     return this.state.banner.map((val, index) => {
       return (
-        <div key={index}>
+        <div key={index} style={{ border: "1px solid red" }}>
           <img
+            key={index}
             src={val}
             style={{
-              height: "300px",
-              width: "600px",
-              borderRadius: "8px",
-              overflow: "hidden",
-              margin: "20px"
+              height: "200px",
+              width: "388px",
+              padding: "10px",
+              borderRadius: "20px"
+              // border: "1px solid blue"
+              // overflow: "hidden"
             }}
             alt=""
           />
@@ -40,13 +41,14 @@ class Carousel extends Component {
     return (
       <div className="homecarousel">
         <Slider
-          className="center"
+          className="center "
           dots={true}
           centerMode={true}
           infinite={true}
-          centerPadding="1px"
+          centerPadding="0"
           slidesToShow={3}
-          speed={500}
+          focusOnSelect={true}
+          speed={800}
           autoplay
           autoplaySpeed={5000}
           pauseOnHover={true}
