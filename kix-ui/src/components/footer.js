@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Container, Jumbotron } from "react-bootstrap";
 //Import Icon
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
-import { AiTwotoneShop } from "react-icons/ai";
 
 class Footer extends Component {
   state = {};
@@ -16,9 +15,6 @@ class Footer extends Component {
               <div className="footer-left">
                 <div className="footer-logo kix">
                   K <span style={{ color: "#393e46" }}>I</span> X
-                  {/* <a href="/">
-                    <AiTwotoneShop style={{ fontSize: 30, color: "#4ecca3" }} />
-                  </a> */}
                 </div>
                 <ul>
                   <li>Address: Bekasi City</li>

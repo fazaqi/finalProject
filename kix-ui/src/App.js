@@ -13,7 +13,7 @@ import Login from "./pages/login";
 import Homepage from "./pages/home";
 import Register from "./pages/register";
 import Profile from "./pages/profile";
-
+import Sidebar from "./components/sidebar";
 //Style
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
@@ -63,6 +63,7 @@ class App extends Component {
           <Route path="/register" exact component={Register} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/test" exact component={Tes} />
+          <Route path="/sidebar" exact component={Sidebar} />
         </Switch>
       </Fragment>
     );

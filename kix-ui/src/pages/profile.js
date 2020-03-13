@@ -5,6 +5,7 @@ import Navbar from "../components/navbar";
 import userimg from "../support/user.svg";
 import UserProfile from "../components/user/userProfile";
 import SellerProfile from "../components/seller/sellerProfile";
+import ManageProduk from "../components/seller/manageProduk";
 import Footer from "../components/footer";
 
 //Style
@@ -14,64 +15,16 @@ import Nav from "react-bootstrap/Nav";
 //Utility
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { getDataUser } from "../redux/actions";
+import Axios from "axios";
+import { APIURL } from "../helper/apiUrl";
 
 class Profile extends Component {
-  state = {
-    // nama: "",
-    // nomorhp: "",
-    // alamat: ""
-    // jeniskelamin: null
-  };
-
-  // componentDidMount() {
-  //   const { id, role } = this.props;
-  //   console.log(id, role);
-  //   Axios.post(`${APIURL}manage/getuser`, { id, role })
-  //     .then(res => {
-  //       // if (role === 2) {
-  //       //   let {}
-  //       // }else if (role === 3) {
-  //       //   let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
-  //       //   let data = {nama,nomorhp,alamat, jeniskelamin}
-  //       // }
-  //       // console.log(res.data[0]);
-  //       // this.setState({ nama, nomorhp, alamat, jeniskelamin });
-  //       this.setState(res.data[0]);
-  //       console.log(this.state);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // notify = () => toast.success("Data Berhasil Diubah.");
-
-  // btnSimpan = () => {
-  //   let nama = this.refs.nama.value;
-  //   let nomorhp = this.refs.hp.value;
-  //   let alamat = this.refs.alamat.value;
-  //   let jeniskelamin = "";
-
-  //   if (this.refs.jkp.checked) {
-  //     jeniskelamin = "Pria";
-  //   } else if (this.refs.jkw.checked) {
-  //     jeniskelamin = "Wanita";
-  //   }
-
-  //   let data = { nama, alamat, jeniskelamin, nomorhp };
-  //   console.log(data);
-
-  //   Axios.put(`${APIURL}manage/updateuser/${this.props.id}`, data)
-  //     .then(res => {
-  //       console.log(res);
-  //       this.notify();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
+  state = {};
 
   render() {
+    // console.log("hal profil", this.props.location.state);
+    // console.log(this.props.history);
     if (this.props.login) {
       return (
         <div>
@@ -126,13 +79,13 @@ class Profile extends Component {
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link eventKey="Wishlist">Wishlist</Nav.Link>
+                          <Nav.Link eventKey="wishlist">Wishlist</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link eventKey="empat">Tab 4</Nav.Link>
+                          <Nav.Link eventKey="produk">Produk</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link eventKey="lima">Tab 5</Nav.Link>
+                          <Nav.Link eventKey="pass">Ganti Password</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                           <Nav.Link eventKey="enam">Tab 6</Nav.Link>
@@ -155,17 +108,17 @@ class Profile extends Component {
                       ) : null}
                       {/* <UserProfile /> */}
                     </Tab.Pane>
-                    <Tab.Pane eventKey="dua">
-                      <h1>Dua</h1>
+                    <Tab.Pane eventKey="pesanan">
+                      <h1>Pesanan</h1>
                     </Tab.Pane>
-                    <Tab.Pane eventKey="tiga">
-                      <h1>Tiga</h1>
+                    <Tab.Pane eventKey="wishlist">
+                      <h1>Wishlist</h1>
                     </Tab.Pane>
-                    <Tab.Pane eventKey="empat">
-                      <h1>Empat</h1>
+                    <Tab.Pane eventKey="produk">
+                      <ManageProduk />
                     </Tab.Pane>
-                    <Tab.Pane eventKey="lima">
-                      <h1>Lima</h1>
+                    <Tab.Pane eventKey="pass">
+                      <h1>Ganti Password</h1>
                     </Tab.Pane>
                     <Tab.Pane eventKey="enam">
                       <h1>Enam</h1>
@@ -188,11 +141,11 @@ const mapStateToProps = state => {
   return {
     login: state.auth.login,
     nama: state.auth,
-    role: state.auth.roleId
+    role: state.auth.roleId,
+    id: state.auth.id
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { getDataUser })(Profile);
 
-//Defaultvalue jenis kelamin belom bisa
 //Belum ada Proteksi jika ada yang kosong

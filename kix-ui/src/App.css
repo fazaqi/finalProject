@@ -30,6 +30,16 @@ body {
   text-decoration: none !important;
 }
 
+.customlink {
+  text-decoration: none;
+  color: black;
+}
+
+.customlink:hover {
+  text-decoration: none;
+  color: black;
+}
+
 .productCard {
   margin-top: 150px;
   margin-bottom: 150px;
@@ -458,5 +468,28 @@ hr.style1 {
   top: 0;
   padding: 13px 20px 12px;
   cursor: pointer;
+}
+/* ===================== */
+
+/* MANAGE PRODUK */
+.btnaddproduk {
+  width: 100%;
+  height: 3rem;
+  background-color: #4ecca3;
+  border-color: #4ecca3;
+
+  transition: ease-in-out 300ms;
+}
+
+.btnaddproduk:hover {
+  background-color: #309271;
+}
+
+.btnaddproduk:active {
+  background-color: #309271;
+}
+
+.btnaddproduk:focus {
+  background-color: #309271;
 }
 /* ===================== */

@@ -4,6 +4,7 @@ import Axios from "axios";
 import { APIURL } from "../../helper/apiUrl";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
+import { getDataUser } from "../../redux/actions";
 
 class UserProfile extends Component {
   state = {};
@@ -15,7 +16,20 @@ class UserProfile extends Component {
       .then(res => {
         let { nama, nomorhp, alamat, jeniskelamin } = res.data[0];
         this.setState({ nama, nomorhp, alamat, jeniskelamin });
-        console.log(this.state);
+        // console.log(this.state);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  componentDidUpdate() {
+    Axios.get(`${APIURL}user/login/${this.props.id}`)
+      .then(res => {
+        if (res.data.length) {
+          console.log(res.data[0]);
+          this.props.getDataUser(res.data[0]);
+        }
       })
       .catch(err => {
         console.log(err);
@@ -24,20 +38,19 @@ class UserProfile extends Component {
 
   notify = () => toast.success("Data Berhasil Diubah.");
 
+  handleChange = e => {
+    console.log(e.target.value);
+    this.setState({ jeniskelamin: e.target.value });
+  };
+
   btnSimpan = () => {
     let nama = this.refs.nama.value;
     let nomorhp = this.refs.hp.value;
     let alamat = this.refs.alamat.value;
-    let jeniskelamin = "";
-
-    if (this.refs.jkp.checked) {
-      jeniskelamin = "Pria";
-    } else if (this.refs.jkw.checked) {
-      jeniskelamin = "Wanita";
-    }
+    let jeniskelamin = this.refs.jeniskelamin.value;
 
     let data = { nama, alamat, jeniskelamin, nomorhp };
-    console.log(data);
+    // console.log(data);
 
     Axios.put(`${APIURL}manage/updateuser/${this.props.id}`, data)
       .then(res => {
@@ -52,7 +65,8 @@ class UserProfile extends Component {
   render() {
     return (
       <div className="profile-content">
-        <h2 className="kix mb-5">Profil</h2>
+        <h2 className="kix ">Profil Saya</h2>
+        <hr className="mt-3 mb-4" />
         <Form>
           {/* NAMA LENGKAP */}
           <Form.Group as={Row}>
@@ -83,35 +97,22 @@ class UserProfile extends Component {
           </Form.Group>
 
           {/* JENIS KELAMIN */}
-          <fieldset>
-            <Form.Group as={Row}>
-              <Form.Label as="legend" column sm={2}>
-                Jenis Kelamin
-              </Form.Label>
-              <Col sm={10} className="mt-1">
-                <Form.Check
-                  inline
-                  label="Pria"
-                  ref="jkp"
-                  type="radio"
-                  name="jeniskelamin"
-                  defaultChecked={
-                    this.state.jeniskelamin === "Pria" ? "true" : "false"
-                  }
-                />
-                <Form.Check
-                  inline
-                  label="Wanita"
-                  ref="jkw"
-                  type="radio"
-                  name="jeniskelamin"
-                  defaultChecked={
-                    this.state.jeniskelamin === "Wanita" ? "true" : "false"
-                  }
-                />
-              </Col>
-            </Form.Group>
-          </fieldset>
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+              Jenis Kelamin
+            </Form.Label>
+            <Col sm={10} className="mt-1">
+              <Form.Control
+                as="select"
+                ref="jeniskelamin"
+                value={this.state.jeniskelamin}
+                onChange={this.handleChange}
+              >
+                <option value="Pria">Pria</option>
+                <option value="Wanita">Wanita</option>
+              </Form.Control>
+            </Col>
+          </Form.Group>
 
           {/* NO HP */}
           <Form.Group as={Row} controlId="formHorizontalPassword">
@@ -177,4 +178,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps, { getDataUser })(UserProfile);

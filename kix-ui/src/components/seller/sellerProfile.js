@@ -13,10 +13,10 @@ class UserProfile extends Component {
     // console.log(id, role);
     Axios.post(`${APIURL}manage/getuser`, { id, role })
       .then(res => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         let { namatoko, nomorhp, alamattoko, deskripsitoko } = res.data[0];
         this.setState({ namatoko, nomorhp, alamattoko, deskripsitoko });
-        console.log(this.state);
+        // console.log(this.state);
       })
       .catch(err => {
         console.log(err);

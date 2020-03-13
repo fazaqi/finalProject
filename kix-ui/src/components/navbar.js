@@ -6,6 +6,7 @@ import { Navbar, Nav, NavDropdown, Form, Button, Badge } from "react-bootstrap";
 // Icons
 import { FiShoppingCart } from "react-icons/fi";
 import { MdSettings, MdExitToApp } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 
 //Redux
 import { connect } from "react-redux";
@@ -24,6 +25,14 @@ class Header extends Component {
   };
 
   render() {
+    const dropdownTitle = (
+      <div style={{ display: "inline-block" }}>
+        <FaRegUserCircle className="mr-2 mb-1" style={{ fontSize: "18" }} />
+        {this.props.nama.nama ||
+          this.props.nama.namatoko ||
+          this.props.username}
+      </div>
+    );
     return (
       <div>
         <Navbar bg="light" expand="lg">
@@ -75,13 +84,15 @@ class Header extends Component {
                   </Badge>
                 </Button>
                 <div className="leftBorderDiv"></div>
+
                 <NavDropdown
                   alignRight
-                  title={
-                    this.props.nama.nama ||
-                    this.props.nama.namatoko ||
-                    this.props.username
-                  }
+                  // title={
+                  //   this.props.nama.nama ||
+                  //   this.props.nama.namatoko ||
+                  //   this.props.username
+                  // }
+                  title={dropdownTitle}
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
