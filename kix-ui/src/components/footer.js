@@ -21,17 +21,6 @@ class Footer extends Component {
                   <li>Phone: +65 11.188.888</li>
                   <li>Email: hello.colorlib@gmail.com</li>
                 </ul>
-                <div className="footer-social">
-                  <a href="http://facebook.com">
-                    <FaFacebookF />
-                  </a>
-                  <a href="http://instagram.com">
-                    <FaInstagram />
-                  </a>
-                  <a href="http://twitter.com">
-                    <FaTwitter />
-                  </a>
-                </div>
               </div>
             </div>
             <div className="col-lg-2 offset-lg-1">
@@ -74,14 +63,18 @@ class Footer extends Component {
             </div>
             <div className="col-lg-4">
               <div className="newslatter-item">
-                <h5>Join Our Newsletter Now</h5>
-                <p>
-                  Get E-mail updates about our latest shop and special offers.
-                </p>
-                <form action="#" className="subscribe-form">
-                  <input type="text" placeholder="Enter Your Mail" />
-                  <button type="button">Subscribe</button>
-                </form>
+                <h5>Our Social Media</h5>
+                <div className="footer-social">
+                  <a href="http://facebook.com">
+                    <FaFacebookF />
+                  </a>
+                  <a href="http://instagram.com">
+                    <FaInstagram />
+                  </a>
+                  <a href="http://twitter.com">
+                    <FaTwitter />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

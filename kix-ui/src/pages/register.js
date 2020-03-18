@@ -115,12 +115,14 @@ class Register extends Component {
           <Tab.Container defaultActiveKey="pembeli">
             <Nav justify variant="tabs" className=" mb-3">
               <Nav.Item onClick={this.reset}>
-                <Nav.Link eventKey="pembeli" className="nodecor">
+                <Nav.Link eventKey="pembeli" className="registab">
                   Daftar Sebagai Pembeli
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item onClick={this.reset}>
-                <Nav.Link eventKey="penjual">Daftar Sebagai Penjual</Nav.Link>
+                <Nav.Link eventKey="penjual" className="registab">
+                  Daftar Sebagai Penjual
+                </Nav.Link>
               </Nav.Item>
             </Nav>
 
@@ -204,14 +206,16 @@ class Register extends Component {
                 </Form>
 
                 {/* Button Register */}
-                <Button
-                  className="mt-4 btnlogin"
-                  onClick={this.onSubmit}
-                  onMouseDown={this.handleDefault}
-                  size="lg"
-                >
-                  Daftar
-                </Button>
+                <div className="text-center ">
+                  <Button
+                    className="mt-4 btnlogin"
+                    onClick={this.onSubmit}
+                    onMouseDown={this.handleDefault}
+                    size="lg"
+                  >
+                    Daftar
+                  </Button>
+                </div>
               </Tab.Pane>
               {/* ========= REGISTER PENJUAL ========= */}
               <Tab.Pane eventKey="penjual">
@@ -310,14 +314,16 @@ class Register extends Component {
                 </Form>
 
                 {/* Button Register */}
-                <Button
-                  className="mt-4 btnlogin"
-                  onClick={this.onSubmitToko}
-                  onMouseDown={this.handleDefault}
-                  size="lg"
-                >
-                  Daftar
-                </Button>
+                <div className="text-center ">
+                  <Button
+                    className="mt-4 btnlogin"
+                    onClick={this.onSubmitToko}
+                    onMouseDown={this.handleDefault}
+                    size="lg"
+                  >
+                    Daftar
+                  </Button>
+                </div>
               </Tab.Pane>
             </Tab.Content>
           </Tab.Container>

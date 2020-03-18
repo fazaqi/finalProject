@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 //Component
-import Navbar from "../components/navbar";
 import Carousel from "../components/homeCarousel";
 import Banner from "../components/banner";
 import Footer from "../components/footer";
@@ -15,9 +14,6 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        {/* NAVBAR */}
-        <Navbar />
-
         {/* CAROUSEL */}
         <Jumbotron
           fluid

@@ -13,7 +13,7 @@ module.exports = {
     }
     db.query(sql, (err, result) => {
       if (err) res.status(500).send({ status: "error", err });
-      console.log(result);
+      // console.log(result);
       return res.status(200).send(result);
     });
   },

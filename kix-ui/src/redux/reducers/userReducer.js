@@ -1,18 +1,21 @@
 const INITAL_STATE = {
-  nama: "",
-  alamat: "",
-  jeniskelamin: "",
-  nomorhp: ""
+  // nama: "",
+  // alamat: "",
+  // email: "",
+  // jeniskelamin: "",
+  // nomorhp: "",
+  loading: true,
+  error: ""
 };
 
 export default (state = INITAL_STATE, action) => {
   switch (action.type) {
-    case "LOGIN_SUCCESS":
-      return { ...state, ...action.payload, login: true, error: "" };
-    case "LOGIN_ERROR":
-      return { ...state, error: action.payload };
-    case "CLEAR_ERROR":
-      return { ...state, error: "" };
+    case "GETDATA_SUCCESS":
+      return { ...state, ...action.payload, loading: false, error: "" };
+    case "GETDATA_FAIL":
+      return { ...state, error: "GAGAL" };
+    case "LOADING_USER":
+      return { ...state, loading: true };
     case "LOGOUT":
       return INITAL_STATE;
     default:

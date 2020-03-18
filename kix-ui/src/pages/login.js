@@ -12,6 +12,7 @@ import { FaUserCircle, FaLock } from "react-icons/fa";
 import { connect } from "react-redux";
 import { loginAct, clearError } from "../redux/actions";
 import { Redirect } from "react-router-dom";
+import Loading from "../components/loading";
 
 class Login extends Component {
   state = {
@@ -45,6 +46,9 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
     if (this.props.login) {
       return <Redirect to={"/"} />;
     }
@@ -87,15 +91,17 @@ class Login extends Component {
             </Form.Group>
           </Form>
           {/* Button Login */}
-          <Button
-            className="mt-4 btnlogin"
-            onClick={this.onSubmit}
-            onMouseDown={this.handleDefault}
-            disabled={this.state.username === "" ? true : false}
-            size="lg"
-          >
-            Masuk
-          </Button>
+          <div className="text-center mt-5">
+            <Button
+              className="btnlogin"
+              onClick={this.onSubmit}
+              onMouseDown={this.handleDefault}
+              disabled={this.state.username === "" ? true : false}
+              size="lg"
+            >
+              Masuk
+            </Button>
+          </div>
         </div>
         {/* Alert Jika Salah Username atau Password */}
         {this.props.error ? (
@@ -119,7 +125,8 @@ class Login extends Component {
 const MapstateToprops = state => {
   return {
     login: state.auth.login,
-    error: state.auth.error
+    error: state.auth.error,
+    loading: state.auth.loading
   };
 };
 

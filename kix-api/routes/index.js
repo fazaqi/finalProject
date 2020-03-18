@@ -1,7 +1,7 @@
-const logresRoutes = require("./logresRoutes");
+const logregRoutes = require("./logregRoutes");
 const userRoutes = require("./userRoutes");
 
 module.exports = {
-  logresRoutes,
+  logregRoutes,
   userRoutes
 };
