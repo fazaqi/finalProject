@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 import HomeCard from "../components/homeCard";
 
 //Style
-import { Jumbotron, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 class Homepage extends Component {
   state = {};
@@ -15,21 +15,15 @@ class Homepage extends Component {
     return (
       <div>
         {/* CAROUSEL */}
-        <Jumbotron
-          fluid
-          style={{
-            backgroundColor: "transparent",
-            height: "50vh",
-            // border: "1px solid red",
-            paddingTop: "1rem",
-            paddingBottom: "1rem"
-          }}
-        >
+
+        <div>
           <Carousel />
-        </Jumbotron>
+        </div>
 
         {/* BANNER */}
-        <Banner />
+        <div style={{ marginTop: "4%" }}>
+          <Banner />
+        </div>
 
         {/* PRODUCTCARD */}
         <Container>

@@ -1,38 +1,31 @@
 import React, { Component } from "react";
 
 // Import Style
-import Slider from "react-slick";
+import Carousel from "react-bootstrap/Carousel";
 
 // Import Gambar
-import banner1 from "../support/banner-carousel/1.png";
-import banner2 from "../support/banner-carousel/2.png";
-import banner3 from "../support/banner-carousel/3.png";
-import banner4 from "../support/banner-carousel/4.png";
-import banner5 from "../support/banner-carousel/5.png";
+import banner1 from "../support/banner-carousel/1.jpg";
+import banner2 from "../support/banner-carousel/2.jpg";
+import banner3 from "../support/banner-carousel/3.jpg";
+import banner4 from "../support/banner-carousel/4.jpg";
 
-class Carousel extends Component {
+class HomeCarousel extends Component {
   state = {
-    banner: [banner1, banner2, banner3, banner4, banner5]
+    banner: [banner1, banner2, banner3, banner4]
   };
 
   renderItem = () => {
     return this.state.banner.map((val, index) => {
       return (
-        <div key={index} style={{ border: "1px solid red" }}>
+        <Carousel.Item key={index}>
           <img
-            key={index}
+            className="d-block w-100"
             src={val}
-            style={{
-              height: "200px",
-              width: "388px",
-              padding: "10px",
-              borderRadius: "20px"
-              // border: "1px solid blue"
-              // overflow: "hidden"
-            }}
-            alt=""
+            alt="carouselimg"
+            width={900}
+            height={500}
           />
-        </div>
+        </Carousel.Item>
       );
     });
   };
@@ -40,24 +33,10 @@ class Carousel extends Component {
   render() {
     return (
       <div className="homecarousel">
-        <Slider
-          className="center "
-          dots={true}
-          centerMode={true}
-          infinite={true}
-          centerPadding="0"
-          slidesToShow={3}
-          focusOnSelect={true}
-          speed={800}
-          autoplay
-          autoplaySpeed={5000}
-          pauseOnHover={true}
-        >
-          {this.renderItem()}
-        </Slider>
+        <Carousel>{this.renderItem()}</Carousel>
       </div>
     );
   }
 }
 
-export default Carousel;
+export default HomeCarousel;

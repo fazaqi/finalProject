@@ -8,6 +8,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdSettings, MdExitToApp } from "react-icons/md";
 import { FaRegUserCircle, FaDolly } from "react-icons/fa";
 import { AiTwotoneShop } from "react-icons/ai";
+import { FiBell } from "react-icons/fi";
 
 //Redux
 import { connect } from "react-redux";
@@ -119,7 +120,7 @@ class Header extends Component {
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
-                  <NavDropdown.Item href="/profile">
+                  <NavDropdown.Item href="/profile-user">
                     <MdSettings className="mr-2" /> Profil
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
@@ -133,7 +134,7 @@ class Header extends Component {
               // UNTUK MENU PENJUAL
               <Nav className="ml-auto">
                 <Button variant="light" onMouseDown={this.handleDefault}>
-                  <FiShoppingCart
+                  <FiBell
                     style={{ fontSize: "20px" }}
                     className="d-inline-block"
                   />
@@ -158,7 +159,7 @@ class Header extends Component {
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
-                  <NavDropdown.Item href="/profile/seller">
+                  <NavDropdown.Item href="/profile-seller">
                     <MdSettings className="mr-2" /> Profil Toko
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/manage-produk">

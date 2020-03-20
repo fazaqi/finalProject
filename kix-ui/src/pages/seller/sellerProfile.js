@@ -3,6 +3,7 @@ import React, { Component } from "react";
 //Component
 import shopimg from "../../support/icon/shop.svg";
 import Footer from "../../components/footer";
+import NotFound from "../notfound";
 
 //Style
 import { Form, Row, Col, Button } from "react-bootstrap";
@@ -54,7 +55,9 @@ class Profile extends Component {
     if (this.props.login === false) {
       return <Redirect to="/" />;
     }
-
+    if (this.props.role !== 2) {
+      return <NotFound />;
+    }
     return (
       <div>
         <div className="container mb-5">

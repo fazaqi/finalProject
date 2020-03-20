@@ -31,7 +31,14 @@ module.exports = {
             .status(200)
             .send({ status: "Registrasi User Berhasil", resInsert });
         });
-      } //KASIH ELSE DISINI JIKA SAAT REGISTER USERNAME ATAU EMAIL SUDAH TERPAKAI
+      } else {
+        //JIKA USERNAME/EMAIL YANG INGIN DIDAFTARKAN SUDAH TERPAKAI
+        if (result[0].username === username) {
+          res.send({ status: "Username Sudah Terdaftar" });
+        } else if (result[0].email === email) {
+          res.send({ status: "Email Sudah Terdaftar" });
+        }
+      }
     });
   },
   regisToko: (req, res) => {
@@ -64,7 +71,14 @@ module.exports = {
             .status(200)
             .send({ status: "Registrasi Toko Berhasil", resInsert });
         });
-      } //KASIH ELSE DISINI JIKA SAAT REGISTER USERNAME ATAU EMAIL SUDAH TERPAKAI
+      } else {
+        //JIKA USERNAME/EMAIL YANG INGIN DIDAFTARKAN SUDAH TERPAKAI
+        if (result[0].username === username) {
+          res.send({ status: "Username Sudah Terdaftar" });
+        } else if (result[0].email === email) {
+          res.send({ status: "Email Sudah Terdaftar" });
+        }
+      }
     });
   }
 };

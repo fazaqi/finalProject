@@ -8,7 +8,7 @@ import HeadShake from "react-reveal/HeadShake";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FaUserCircle, FaLock, FaStore } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Slide } from "react-toastify";
 import { Tab, Nav } from "react-bootstrap";
 
 //Utility
@@ -45,8 +45,11 @@ class Register extends Component {
     } else if ((username, password, repassword, email)) {
       Axios.post(`${APIURL}user/registuser`, { username, password, email })
         .then(res => {
-          console.log(res);
-          this.notify();
+          // console.log(res.data.status);
+          this.notify(res.data.status);
+          if (res.data.status === "Registrasi User Berhasil") {
+            setTimeout(() => this.setState({ toLogin: true }), 2500);
+          }
         })
         .catch(err => {
           console.log(err);
@@ -73,8 +76,11 @@ class Register extends Component {
         namatoko
       })
         .then(res => {
-          console.log(res);
-          this.notify();
+          console.log(res.status);
+          this.notify(res.data.status);
+          if (res.data.status === "Registrasi Toko Berhasil") {
+            setTimeout(() => this.setState({ toLogin: true }), 2500);
+          }
         })
         .catch(err => {
           console.log(err);
@@ -94,9 +100,17 @@ class Register extends Component {
     event.preventDefault();
   };
 
-  notify = () => {
-    toast.success("Berhasil Daftar");
-    this.setState({ toLogin: true });
+  notify = message => {
+    if (
+      message === "Registrasi User Berhasil" ||
+      message === "Registrasi Toko Berhasil"
+    ) {
+      toast.success(message);
+    } else if (message === "Username Sudah Terdaftar") {
+      toast.error(message);
+    } else if (message === "Email Sudah Terdaftar") {
+      toast.error(message);
+    }
   };
 
   reset = () => this.setState(initial_state);
@@ -357,7 +371,7 @@ class Register extends Component {
         ) : null}
 
         {/* SUCCESS TOAST */}
-        <ToastContainer
+        {/* <ToastContainer
           position="bottom-center"
           autoClose={2500}
           hideProgressBar={false}
@@ -365,6 +379,19 @@ class Register extends Component {
           closeOnClick
           rtl={false}
           pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover={false}
+        /> */}
+
+        <ToastContainer
+          transition={Slide}
+          position="bottom-center"
+          autoClose={2500}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange={false}
           draggable={false}
           pauseOnHover={false}
         />
@@ -380,7 +407,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Register);
-
-//Belom ada alert kalo berhasil
-//Redirect ke login berhasil tapi toast gak keluar
-//Saat pindah tab clear inputnya
