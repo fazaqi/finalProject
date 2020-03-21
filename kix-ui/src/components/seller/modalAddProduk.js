@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Modal, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
+import { connect } from "react-redux";
+import Axios from "axios";
+import { APIURL } from "../../helper/apiUrl";
 
 class ModalAddProduk extends Component {
   state = {
@@ -20,14 +23,31 @@ class ModalAddProduk extends Component {
   };
 
   onSave = () => {
+    let formdata = new FormData();
+    let Headers = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    };
     let nama = this.refs.namaproduk.value;
     let harga = this.refs.harga.value;
     let kondisi = this.refs.kondisi.value;
     let deskripsi = this.refs.deskripsi.value;
-    let gambar = this.state.gambar;
+    let gambar = this.state.gambar[0];
 
-    let data = { nama, harga, kondisi, deskripsi, gambar };
+    let data = { nama, harga, kondisi, deskripsi, usersId: this.props.id };
     console.log(data);
+    // console.log(gambar[0]);
+    formdata.append("image", gambar);
+    formdata.append("data", JSON.stringify(data));
+
+    Axios.post(`${APIURL}manage/addproduk`, formdata, Headers)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     //AXIOS DISINI
   };
@@ -124,4 +144,9 @@ class ModalAddProduk extends Component {
   }
 }
 
-export default ModalAddProduk;
+const MapstateToprops = state => {
+  return {
+    id: state.auth.id
+  };
+};
+export default connect(MapstateToprops)(ModalAddProduk);

@@ -24,6 +24,7 @@ class HomeCarousel extends Component {
             alt="carouselimg"
             width={900}
             height={500}
+            style={{ objectFit: "cover" }}
           />
         </Carousel.Item>
       );
