@@ -21,6 +21,8 @@ import NotFound from "./pages/notfound";
 //Style
 import Tes from "./pages/tes";
 import ManageProduk from "./pages/seller/manageProduk";
+import DetailProduk from "./pages/detailProduk";
+import DetailToko from "./pages/seller/detailToko";
 
 class App extends Component {
   state = {};
@@ -62,6 +64,8 @@ class App extends Component {
           <Route path="/profile-user" exact component={Profile} />
           <Route path="/profile-seller" exact component={SellerProfile} />
           <Route path="/manage-produk" exact component={ManageProduk} />
+          <Route path="/detail-produk/:id" exact component={DetailProduk} />
+          <Route path="/detail-toko/:id" exact component={DetailToko} />
           <Route path="/test" exact component={Tes} />
           <Route path="/*" component={NotFound} />
         </Switch>

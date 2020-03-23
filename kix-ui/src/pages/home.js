@@ -21,7 +21,7 @@ class Homepage extends Component {
         </div>
 
         {/* BANNER */}
-        <div style={{ marginTop: "4%" }}>
+        <div style={{ marginTop: "5vh" }}>
           <Banner />
         </div>
 

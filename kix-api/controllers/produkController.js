@@ -34,8 +34,8 @@ module.exports = {
         let dataproduk = {
           namaProduk: data.nama,
           harga: data.harga,
-          kondisi: data.kondisi,
           deskripsi: data.deskripsi,
+          categoryId: data.kategori,
           usersId: data.usersId
         };
         console.log(data);
@@ -46,8 +46,7 @@ module.exports = {
             console.log(err.message);
             fs.unlinkSync("./public" + imagePath);
             return res.status(500).json({
-              message:
-                "There's an error on the server. Please contact the administrator.",
+              message: "Server Error",
               error: err.message
             });
           }
@@ -70,8 +69,7 @@ module.exports = {
       });
     } catch (error) {
       return res.status(500).json({
-        message:
-          "There's an error on the server. Please contact the administrator.",
+        message: "Server Error",
         error: error.message
       });
     }
@@ -92,8 +90,114 @@ module.exports = {
       });
     } catch (error) {
       return res.status(500).json({
-        message:
-          "There's an error on the server. Please contact the administrator.",
+        message: "Server Error",
+        error: error.message
+      });
+    }
+  },
+  getAllCategory: (req, res) => {
+    try {
+      let sql = `SELECT * FROM products_category`;
+      db.query(sql, (err, result) => {
+        if (err) res.status(500).send({ message: "Get Category Error" });
+        return res.status(200).send(result);
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
+        error: error.message
+      });
+    }
+  },
+  getProdCategory: (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT categoryId from products WHERE id=${id}`;
+
+      db.query(sql, (err, result) => {
+        if (err) {
+          res.status(500).send({ message: "Get Product Category Error" });
+        }
+        return res.status(200).send(result);
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
+        error: error.message
+      });
+    }
+  },
+  updateProduk: (req, res) => {
+    try {
+      const {
+        nama,
+        harga,
+        deskripsi,
+        idproduk,
+        usersId,
+        kategori,
+        stok
+      } = req.body;
+      const dataproduk = {
+        namaProduk: nama,
+        harga,
+        deskripsi,
+        categoryId: kategori,
+        stok
+      };
+      let sql = `UPDATE products SET ? WHERE id=${idproduk} AND usersId=${usersId}`;
+
+      db.query(sql, dataproduk, (err, result) => {
+        if (err) {
+          return res.status(500).send({ message: "Update Product Error", err });
+        }
+        console.log("berhasil");
+        return res.status(200).send({ message: "Update Berhasil", result });
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
+        error: error.message
+      });
+    }
+  },
+  getAllProduct: (req, res) => {
+    try {
+      let sql = `SELECT p.*, pi.image, up.namatoko
+                 FROM products p JOIN products_image pi
+                 ON p.id=pi.productsId JOIN users_penjual up
+                 ON up.usersId=p.usersId
+                 WHERE p.deleted=0 
+                 ORDER BY RAND()`;
+
+      db.query(sql, (err, result) => {
+        if (err) res.status(500).send({ message: "Get Produk Error", err });
+        return res.status(200).send(result);
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
+        error: error.message
+      });
+    }
+  },
+  getDetailProduk: (req, res) => {
+    try {
+      const { id } = req.params;
+      let sql = `SELECT p.*, pi.image, up.namatoko
+                 FROM products p JOIN products_image pi
+                 ON p.id=pi.productsId JOIN users_penjual up
+                 ON up.usersId=p.usersId
+                 WHERE p.id=${id} AND p.deleted=0;`;
+
+      db.query(sql, (err, result) => {
+        if (err)
+          res.status(500).send({ message: "Get Detail Produk Error", err });
+        return res.status(200).send(result);
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
         error: error.message
       });
     }

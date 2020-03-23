@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { loginAct, clearError } from "../redux/actions";
 import { Redirect } from "react-router-dom";
 import Loading from "../components/loading";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -91,7 +92,7 @@ class Login extends Component {
             </Form.Group>
           </Form>
           {/* Button Login */}
-          <div className="text-center mt-5">
+          <div className="text-center mt-4">
             <Button
               className="btnlogin"
               onClick={this.onSubmit}
@@ -101,6 +102,14 @@ class Login extends Component {
             >
               Masuk
             </Button>
+          </div>
+          <hr />
+          <div className="text-center mt-3">
+            <Link to="/register">
+              <Button variant="light" style={{ color: "grey" }}>
+                Belum Punya Akun? Klik Disini Untuk Daftar
+              </Button>
+            </Link>
           </div>
         </div>
         {/* Alert Jika Salah Username atau Password */}
