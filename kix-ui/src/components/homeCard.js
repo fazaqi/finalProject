@@ -32,16 +32,19 @@ class HomeCard extends Component {
     } else {
       return this.state.produk.map((val, index) => {
         return (
-          <Card
-            className="carrd"
-            style={{
-              width: "18rem",
-              marginLeft: "1rem",
-              marginRight: "1rem"
-            }}
+          <Link
+            to={`/detail-produk/${val.id}`}
+            style={{ textDecoration: "none" }}
             key={index}
           >
-            <Link to={`/detail-produk/${val.id}`}>
+            <Card
+              className="carrd"
+              style={{
+                width: "18rem",
+                marginLeft: "1rem",
+                marginRight: "1rem"
+              }}
+            >
               <Card.Img
                 variant="top"
                 src={`${APIURL + val.image}`}
@@ -49,58 +52,21 @@ class HomeCard extends Component {
                 height={250}
                 style={{ objectFit: "contain" }}
               />
-            </Link>
-            <Card.Body>
-              <Link
-                to={`/detail-produk/${val.id}`}
-                style={{ textDecoration: "none" }}
-              >
+
+              <Card.Body>
                 <Card.Title style={{ color: "black" }}>
                   {val.namaProduk}
                 </Card.Title>
-              </Link>
-              <Card.Text style={{ color: "tomato", fontWeight: "bolder" }}>
-                {"Rp " + Numeral(val.harga).format("0,0")}
-              </Card.Text>
-              <Link
-                to={`/detail-toko/${val.usersId}`}
-                style={{ textDecoration: "none" }}
-              >
+
+                <Card.Text style={{ color: "tomato", fontWeight: "bolder" }}>
+                  {"Rp " + Numeral(val.harga).format("0,0")}
+                </Card.Text>
                 <Card.Text style={{ color: "grey", fontSize: 12 }}>
                   <AiTwotoneShop /> - {val.namatoko}
                 </Card.Text>
-              </Link>
-            </Card.Body>
-            <div>
-              <Button
-                variant="info"
-                style={{
-                  width: "12rem",
-                  marginLeft: "1rem",
-                  // marginRight: "1rem",
-                  marginBottom: "1rem"
-                }}
-              >
-                Tambah Ke Keranjang
-              </Button>
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip>Tambah ke Wishlist</Tooltip>}
-              >
-                <Button
-                  variant="danger"
-                  style={{
-                    width: "3rem",
-                    marginLeft: "7px",
-                    marginRight: "auto",
-                    marginBottom: "1rem"
-                  }}
-                >
-                  <FaRegHeart />
-                </Button>
-              </OverlayTrigger>
-            </div>
-          </Card>
+              </Card.Body>
+            </Card>
+          </Link>
         );
       });
     }

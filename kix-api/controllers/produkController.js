@@ -11,7 +11,12 @@ module.exports = {
         if (err) res.status(500).send({ message: "server error", err });
         return res.status(200).send(result);
       });
-    } catch (error) {}
+    } catch (error) {
+      return res.status(500).json({
+        message: "Server Error",
+        error: error.message
+      });
+    }
   },
   addProduk: (req, res) => {
     try {

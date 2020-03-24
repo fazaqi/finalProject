@@ -10,8 +10,12 @@ export const getUser = () => {
         return dispatch({ type: "LOADING_DONE" });
       }
       const res = await Axios.get(`${APIURL}user/login/${id}`);
-      // console.log(res.data[0]);
+      // const resCart = await Axios.get(`${APIURL}trans/getcart/${id}`);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data[0] });
+      // dispatch({
+      //   type: "GETCART_SUCCESS",
+      //   payload: resCart.data.result[0].cart
+      // });
     } catch (error) {
       dispatch({ type: "LOADING_DONE" });
     }

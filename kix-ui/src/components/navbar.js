@@ -106,26 +106,11 @@ class Header extends Component {
                       variant="danger"
                       style={{ fontSize: "70%", verticalAlign: "top" }}
                     >
-                      0
+                      {this.props.cart}
                     </Badge>
                   </Button>
                 </Link>
 
-                <Link to="/wishlist">
-                  <Button variant="light" onMouseDown={this.handleDefault}>
-                    <FaRegHeart
-                      style={{ fontSize: "20px" }}
-                      className="d-inline-block"
-                    />
-                    {/* <Badge
-                      pill
-                      variant="danger"
-                      style={{ fontSize: "70%", verticalAlign: "top" }}
-                    >
-                      0
-                    </Badge> */}
-                  </Button>
-                </Link>
                 <div className="leftBorderDiv"></div>
 
                 <NavDropdown
@@ -140,9 +125,8 @@ class Header extends Component {
                   className="mt-"
                 >
                   <NavDropdown.Item href="/cart">Pembelian</NavDropdown.Item>
-                  <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
                   <NavDropdown.Item href="/profile-user">
-                    Profil
+                    Pengaturan Profil
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.onLogout}>
@@ -212,7 +196,8 @@ const MapstateToprops = state => {
     username: state.auth.username,
     nama: state.auth,
     login: state.auth.login,
-    role: state.auth.roleId
+    role: state.auth.roleId,
+    cart: state.cart.cart
   };
 };
 

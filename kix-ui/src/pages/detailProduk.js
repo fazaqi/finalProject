@@ -8,16 +8,19 @@ import {
   Col,
   Button,
   Container,
-  OverlayTrigger,
-  Tooltip
+  InputGroup,
+  FormControl
 } from "react-bootstrap";
 import Numeral from "numeral";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getCart } from "../redux/actions";
 
 class DetailProduk extends Component {
   state = {
-    produk: ""
+    produk: "",
+    qty: 1
   };
 
   componentDidMount() {
@@ -34,8 +37,39 @@ class DetailProduk extends Component {
     }
   }
 
+  plusQty = () => {
+    if (this.state.qty !== this.state.produk.stok) {
+      this.setState({ qty: this.state.qty + 1 });
+    }
+  };
+
+  minQty = () => {
+    if (this.state.qty !== 1) {
+      this.setState({ qty: this.state.qty - 1 });
+    }
+  };
+
+  addToCart = () => {
+    let idproduk = this.state.produk.id;
+    let iduser = this.props.id;
+    let idseller = this.state.produk.usersId;
+    let qty = this.state.qty;
+
+    let data = { idproduk, iduser, idseller, qty };
+    console.log(data);
+    Axios.post(`${APIURL}trans/addtocart`, data)
+      .then(res => {
+        console.log(res);
+        this.props.getCart();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     let { produk } = this.state;
+    console.log(this.state.qty);
     console.log(produk);
     if (produk.length === 0) {
       return <Loading />;
@@ -75,7 +109,7 @@ class DetailProduk extends Component {
               <div>
                 <Row>
                   <Col sm={4} style={{ color: "grey" }}>
-                    Jumlah Stok
+                    Stok Tersedia
                   </Col>
                   <Col>{produk.stok} pcs</Col>
                 </Row>
@@ -110,19 +144,48 @@ class DetailProduk extends Component {
                 </Row>
               </div>
               <hr />
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip>Tambah ke Wishlist</Tooltip>}
-              >
-                <Button variant="danger">
-                  <FaRegHeart />
-                </Button>
-              </OverlayTrigger>
+              <div>
+                <Row>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Jumlah Beli
+                  </Col>
+                  <Col>
+                    <InputGroup style={{ width: "120px" }}>
+                      <InputGroup.Prepend>
+                        <Button
+                          variant="outline-secondary"
+                          onClick={this.minQty}
+                        >
+                          {" "}
+                          -{" "}
+                        </Button>
+                      </InputGroup.Prepend>
+                      <FormControl
+                        type="number"
+                        readOnly
+                        value={this.state.qty}
+                        style={{ textAlign: "center" }}
+                      />
+                      <InputGroup.Append>
+                        <Button
+                          variant="outline-secondary"
+                          onClick={this.plusQty}
+                        >
+                          {" "}
+                          +{" "}
+                        </Button>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </Col>
+                </Row>
+              </div>
+              <hr />
               <Button
                 style={{
                   marginLeft: "10px"
                 }}
                 variant="success"
+                onClick={this.addToCart}
               >
                 Tambah Ke Keranjang
               </Button>
@@ -135,4 +198,10 @@ class DetailProduk extends Component {
   }
 }
 
-export default DetailProduk;
+const MapstateToprops = state => {
+  return {
+    id: state.auth.id
+  };
+};
+
+export default connect(MapstateToprops, { getCart })(DetailProduk);
