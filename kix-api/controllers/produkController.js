@@ -184,10 +184,11 @@ module.exports = {
   getDetailProduk: (req, res) => {
     try {
       const { id } = req.params;
-      let sql = `SELECT p.*, pi.image, up.namatoko
+      let sql = `SELECT p.*, pi.image, up.namatoko, pc.kategori
                  FROM products p JOIN products_image pi
                  ON p.id=pi.productsId JOIN users_penjual up
-                 ON up.usersId=p.usersId
+                 ON up.usersId=p.usersId JOIN products_category pc
+                 ON pc.id=p.categoryId
                  WHERE p.id=${id} AND p.deleted=0;`;
 
       db.query(sql, (err, result) => {

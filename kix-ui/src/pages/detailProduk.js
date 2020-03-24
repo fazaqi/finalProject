@@ -3,9 +3,17 @@ import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
 import Footer from "../components/footer";
 import Loading from "../components/loading";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Container,
+  OverlayTrigger,
+  Tooltip
+} from "react-bootstrap";
 import Numeral from "numeral";
 import { FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 class DetailProduk extends Component {
   state = {
@@ -55,7 +63,9 @@ class DetailProduk extends Component {
               <hr />
               <div>
                 <Row>
-                  <Col sm={4}>Harga</Col>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Harga
+                  </Col>
                   <Col style={{ color: "tomato", fontWeight: "bolder" }}>
                     {"Rp " + Numeral(produk.harga).format("0,0")}
                   </Col>
@@ -64,42 +74,57 @@ class DetailProduk extends Component {
               <hr />
               <div>
                 <Row>
-                  <Col sm={4}>Jumlah Stok</Col>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Jumlah Stok
+                  </Col>
                   <Col>{produk.stok} pcs</Col>
                 </Row>
               </div>
               <hr />
               <div>
                 <Row>
-                  <Col sm={4}>Kategori Produk</Col>
-                  <Col>Masukin Kategori</Col>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Kategori Produk
+                  </Col>
+                  <Col>{produk.kategori}</Col>
                 </Row>
               </div>
               <hr />
               <div>
                 <Row>
-                  <Col sm={4}>Penjual</Col>
-                  <Col>{produk.namatoko}</Col>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Penjual
+                  </Col>
+                  <Link to={`/detail-toko/${produk.usersId}`} className="kix">
+                    <Col>{produk.namatoko}</Col>
+                  </Link>
                 </Row>
               </div>
               <hr />
               <div>
                 <Row>
-                  <Col sm={4}>Deskripsi</Col>
+                  <Col sm={4} style={{ color: "grey" }}>
+                    Deskripsi
+                  </Col>
                   <Col>{produk.deskripsi}</Col>
                 </Row>
               </div>
               <hr />
-              <Button variant="danger">
-                <FaRegHeart />
-              </Button>
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>Tambah ke Wishlist</Tooltip>}
+              >
+                <Button variant="danger">
+                  <FaRegHeart />
+                </Button>
+              </OverlayTrigger>
               <Button
                 style={{
                   marginLeft: "10px"
                 }}
                 variant="success"
               >
-                Add to Cart
+                Tambah Ke Keranjang
               </Button>
             </Col>
           </Row>

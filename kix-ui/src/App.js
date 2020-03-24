@@ -17,12 +17,12 @@ import Profile from "./pages/user/userProfile";
 import SellerProfile from "./pages/seller/sellerProfile";
 import Loading from "./components/loading";
 import NotFound from "./pages/notfound";
-
-//Style
 import Tes from "./pages/tes";
 import ManageProduk from "./pages/seller/manageProduk";
 import DetailProduk from "./pages/detailProduk";
 import DetailToko from "./pages/seller/detailToko";
+import Cart from "./pages/cart";
+import Shop from "./pages/shop";
 
 class App extends Component {
   state = {};
@@ -66,6 +66,8 @@ class App extends Component {
           <Route path="/manage-produk" exact component={ManageProduk} />
           <Route path="/detail-produk/:id" exact component={DetailProduk} />
           <Route path="/detail-toko/:id" exact component={DetailToko} />
+          <Route path="/cart" exact component={Cart} />
+          <Route path="/shop" exact component={Shop} />
           <Route path="/test" exact component={Tes} />
           <Route path="/*" component={NotFound} />
         </Switch>
@@ -81,5 +83,3 @@ const MapstateToprops = state => {
 };
 
 export default connect(MapstateToprops, { getUser })(App);
-
-//Loading belum di tengah

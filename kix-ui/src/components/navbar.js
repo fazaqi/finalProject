@@ -6,13 +6,14 @@ import { Navbar, Nav, NavDropdown, Form, Button, Badge } from "react-bootstrap";
 // Icons
 import { FiShoppingCart } from "react-icons/fi";
 import { MdSettings, MdExitToApp } from "react-icons/md";
-import { FaRegUserCircle, FaDolly } from "react-icons/fa";
+import { FaRegUserCircle, FaDolly, FaRegHeart } from "react-icons/fa";
 import { AiTwotoneShop } from "react-icons/ai";
 import { FiBell } from "react-icons/fi";
 
 //Redux
 import { connect } from "react-redux";
 import { logoutAct } from "../redux/actions";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = { catOpen: false, menuOpen: false };
@@ -94,19 +95,37 @@ class Header extends Component {
             ) : this.props.role === 3 ? (
               // UNTUK MENU PEMBELI
               <Nav className="ml-auto">
-                <Button variant="light" onMouseDown={this.handleDefault}>
-                  <FiShoppingCart
-                    style={{ fontSize: "20px" }}
-                    className="d-inline-block"
-                  />
-                  <Badge
-                    pill
-                    variant="danger"
-                    style={{ fontSize: "70%", verticalAlign: "top" }}
-                  >
-                    0
-                  </Badge>
-                </Button>
+                <Link to="/cart">
+                  <Button variant="light" onMouseDown={this.handleDefault}>
+                    <FiShoppingCart
+                      style={{ fontSize: "20px" }}
+                      className="d-inline-block"
+                    />
+                    <Badge
+                      pill
+                      variant="danger"
+                      style={{ fontSize: "70%", verticalAlign: "top" }}
+                    >
+                      0
+                    </Badge>
+                  </Button>
+                </Link>
+
+                <Link to="/wishlist">
+                  <Button variant="light" onMouseDown={this.handleDefault}>
+                    <FaRegHeart
+                      style={{ fontSize: "20px" }}
+                      className="d-inline-block"
+                    />
+                    {/* <Badge
+                      pill
+                      variant="danger"
+                      style={{ fontSize: "70%", verticalAlign: "top" }}
+                    >
+                      0
+                    </Badge> */}
+                  </Button>
+                </Link>
                 <div className="leftBorderDiv"></div>
 
                 <NavDropdown
@@ -120,8 +139,10 @@ class Header extends Component {
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
+                  <NavDropdown.Item href="/cart">Pembelian</NavDropdown.Item>
+                  <NavDropdown.Item href="/wishlist">Wishlist</NavDropdown.Item>
                   <NavDropdown.Item href="/profile-user">
-                    <MdSettings className="mr-2" /> Profil
+                    Profil
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.onLogout}>

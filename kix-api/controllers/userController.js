@@ -42,5 +42,16 @@ module.exports = {
         return res.status(200).send({ status: "Update Data Berhasil", result });
       }
     });
+  },
+  getDetailToko: (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    let sql = `SELECT * FROM users_penjual WHERE usersId=${id}`;
+    db.query(sql, (err, result) => {
+      if (err) {
+        return res.status(500).send({ message: "Get Detail Penjual Error" });
+      }
+      return res.status(200).send(result);
+    });
   }
 };

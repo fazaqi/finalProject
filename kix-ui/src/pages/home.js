@@ -7,7 +7,8 @@ import Footer from "../components/footer";
 import HomeCard from "../components/homeCard";
 
 //Style
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Homepage extends Component {
   state = {};
@@ -29,7 +30,13 @@ class Homepage extends Component {
         <Container>
           <HomeCard />
         </Container>
-
+        <div className="text-center mb-5">
+          <Link to="/shop">
+            <Button variant="outline-secondary">
+              Tampilkan Produk Lainnya
+            </Button>
+          </Link>
+        </div>
         {/* FOOTER */}
         <Footer />
       </div>
