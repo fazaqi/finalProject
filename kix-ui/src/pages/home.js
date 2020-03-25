@@ -9,9 +9,11 @@ import HomeCard from "../components/homeCard";
 //Style
 import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Homepage extends Component {
   state = {};
+
   render() {
     return (
       <div>
@@ -44,4 +46,10 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+const MapstateToprops = state => {
+  return {
+    id: state.auth.id
+  };
+};
+
+export default connect(MapstateToprops)(Homepage);

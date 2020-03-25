@@ -9,9 +9,9 @@ module.exports = {
       if (err) res.status(500).send(err);
       // console.log(resSelect[0].roleId);
       if (resSelect[0].roleId === 3) {
-        sql = `SELECT u.id, u.username, u.email, u.roleId, ub.nama 
-               FROM users u JOIN users_pembeli ub  ON u.id = ub.usersId 
-               WHERE u.id=${id}`;
+        sql = `SELECT u.id, u.username, u.email, u.roleId, ub.nama
+               FROM users u JOIN users_pembeli ub ON u.id = ub.usersId 
+               WHERE u.id=${id} `;
       } else if (resSelect[0].roleId === 2) {
         sql = `SELECT u.id, u.username, u.email, u.roleId, up.namatoko 
                FROM users u JOIN users_penjual up  ON u.id = up.usersId 

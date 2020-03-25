@@ -6,7 +6,7 @@ import { Navbar, Nav, NavDropdown, Form, Button, Badge } from "react-bootstrap";
 // Icons
 import { FiShoppingCart } from "react-icons/fi";
 import { MdSettings, MdExitToApp } from "react-icons/md";
-import { FaRegUserCircle, FaDolly, FaRegHeart } from "react-icons/fa";
+import { FaRegUserCircle, FaDolly } from "react-icons/fa";
 import { AiTwotoneShop } from "react-icons/ai";
 import { FiBell } from "react-icons/fi";
 

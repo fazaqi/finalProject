@@ -12,6 +12,14 @@ export const loginAct = (username, password) => {
       }
       dispatch({ type: "LOADING" });
       localStorage.setItem("kix", res.data[0].id);
+      const resCart = await Axios.get(
+        `${APIURL}trans/getcart/${res.data[0].id}`
+      );
+      console.log(resCart);
+      dispatch({
+        type: "GETCART_SUCCESS",
+        payload: resCart.data.result[0].cart
+      });
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: res.data[0]

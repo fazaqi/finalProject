@@ -9,18 +9,25 @@ import {
   Button,
   Container,
   InputGroup,
-  FormControl
+  FormControl,
+  Modal
 } from "react-bootstrap";
 import Numeral from "numeral";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCart } from "../redux/actions";
+import { Redirect } from "react-router-dom";
 
 class DetailProduk extends Component {
   state = {
     produk: "",
-    qty: 1
+    qty: 1,
+    modalToCart: false,
+    redirectCart: false,
+    modalToLogin: false,
+    redirectLogin: false,
+    redirectRegister: false
   };
 
   componentDidMount() {
@@ -50,27 +57,42 @@ class DetailProduk extends Component {
   };
 
   addToCart = () => {
-    let idproduk = this.state.produk.id;
-    let iduser = this.props.id;
-    let idseller = this.state.produk.usersId;
-    let qty = this.state.qty;
+    if (this.props.login) {
+      let idproduk = this.state.produk.id;
+      let iduser = this.props.id;
+      let idseller = this.state.produk.usersId;
+      let qty = this.state.qty;
 
-    let data = { idproduk, iduser, idseller, qty };
-    console.log(data);
-    Axios.post(`${APIURL}trans/addtocart`, data)
-      .then(res => {
-        console.log(res);
-        this.props.getCart();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      let data = { idproduk, iduser, idseller, qty };
+      console.log(data);
+
+      Axios.post(`${APIURL}trans/addtocart`, data)
+        .then(res => {
+          console.log(res);
+          this.props.getCart();
+          this.setState({ modalToCart: true });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      this.setState({ modalToLogin: true });
+    }
   };
 
   render() {
     let { produk } = this.state;
     console.log(this.state.qty);
     console.log(produk);
+    if (this.state.redirectCart) {
+      return <Redirect to="/cart" />;
+    }
+    if (this.state.redirectLogin) {
+      return <Redirect to="/login" />;
+    }
+    if (this.state.redirectRegister) {
+      return <Redirect to="/register" />;
+    }
     if (produk.length === 0) {
       return <Loading />;
     }
@@ -191,7 +213,71 @@ class DetailProduk extends Component {
               </Button>
             </Col>
           </Row>
+
+          {/* MODAL BERHASIL BELI */}
+          <Modal
+            show={this.state.modalToCart}
+            onHide={() =>
+              this.setState({
+                modalToCart: !this.state.modalToCart
+              })
+            }
+            size="sm"
+            centered
+          >
+            <Modal.Body>
+              <p>Hore! Produk Berhasil Ditambahkan ke Cart</p>
+
+              <p>Ingin ke Halaman Cart sekarang?</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="info"
+                onClick={() => this.setState({ redirectCart: true })}
+              >
+                Ya
+              </Button>
+              <Button
+                variant="warning"
+                onClick={() => this.setState({ modalToCart: false })}
+              >
+                Tidak, Nanti Saja
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* MODAL BELUM LOGIN */}
+          <Modal
+            show={this.state.modalToLogin}
+            onHide={() =>
+              this.setState({
+                modalToLogin: !this.state.modalToLogin
+              })
+            }
+            size="sm"
+            centered
+          >
+            <Modal.Body>
+              Anda Harus Daftar atau Login terlebih dahulu untuk membeli Produk
+              ini
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="info"
+                onClick={() => this.setState({ redirectLogin: true })}
+              >
+                Login
+              </Button>
+              <Button
+                variant="warning"
+                onClick={() => this.setState({ redirectRegister: true })}
+              >
+                Register
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Container>
+
         <Footer />
       </div>
     );
@@ -200,7 +286,8 @@ class DetailProduk extends Component {
 
 const MapstateToprops = state => {
   return {
-    id: state.auth.id
+    id: state.auth.id,
+    login: state.auth.login
   };
 };
 

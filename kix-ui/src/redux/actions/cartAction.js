@@ -4,10 +4,9 @@ import { APIURL } from "../../helper/apiUrl";
 export const getCart = () => {
   return async dispatch => {
     try {
-      dispatch({ type: "LOADING" });
       const id = localStorage.getItem("kix");
       if (!id) {
-        return dispatch({ type: "LOADING_DONE" });
+        return dispatch({ type: "GETCART_FAIL" });
       }
 
       const resCart = await Axios.get(`${APIURL}trans/getcart/${id}`);
@@ -17,7 +16,6 @@ export const getCart = () => {
       });
     } catch (error) {
       dispatch({ type: "GETCART_FAIL" });
-      dispatch({ type: "LOADING_DONE" });
     }
   };
 };

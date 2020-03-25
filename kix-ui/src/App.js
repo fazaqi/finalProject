@@ -6,7 +6,7 @@ import "./App.css";
 // import { APIURL } from "./helper/apiUrl";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser, getCart } from "./redux/actions";
+import { getUser } from "./redux/actions";
 
 //Components
 import Header from "./components/navbar";
@@ -29,7 +29,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getUser();
-    this.props.getCart();
     // let id = localStorage.getItem("kix");
     // if (id) {
     //   Axios.get(`${APIURL}user/login/${id}`)
@@ -83,4 +82,4 @@ const MapstateToprops = state => {
   };
 };
 
-export default connect(MapstateToprops, { getUser, getCart })(App);
+export default connect(MapstateToprops, { getUser })(App);

@@ -10,30 +10,17 @@ export const getUser = () => {
         return dispatch({ type: "LOADING_DONE" });
       }
       const res = await Axios.get(`${APIURL}user/login/${id}`);
-      // const resCart = await Axios.get(`${APIURL}trans/getcart/${id}`);
+      const resCart = await Axios.get(`${APIURL}trans/getcart/${id}`);
+      dispatch({
+        type: "GETCART_SUCCESS",
+        payload: resCart.data.result[0].cart
+      });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data[0] });
-      // dispatch({
-      //   type: "GETCART_SUCCESS",
-      //   payload: resCart.data.result[0].cart
-      // });
     } catch (error) {
       dispatch({ type: "LOADING_DONE" });
     }
   };
 };
-
-// export const getDetailUser = (id, role) => {
-//   return async dispatch => {
-//     try {
-//       dispatch({ type: "LOADING_USER" });
-//       const res = await Axios.post(`${APIURL}manage/getuser`, { id, role });
-//       // console.log(res);
-//       dispatch({ type: "GETDATA_SUCCESS", payload: res.data[0] });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
 
 export const getDetail = data => {
   return {
