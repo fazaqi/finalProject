@@ -77,7 +77,7 @@ class HomeCard extends Component {
           className="text-center kix"
           style={{ marginTop: "10vh", fontSize: 40 }}
         >
-          Produk Terbaru
+          Belanja Sekarang
         </h2>
         <div className="container d-flex productCard">
           {this.renderProduk()}

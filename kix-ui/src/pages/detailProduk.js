@@ -26,7 +26,8 @@ class DetailProduk extends Component {
     redirectCart: false,
     modalToLogin: false,
     redirectLogin: false,
-    redirectRegister: false
+    redirectRegister: false,
+    modalRole: false
   };
 
   componentDidMount() {
@@ -56,6 +57,10 @@ class DetailProduk extends Component {
   };
 
   addToCart = () => {
+    if (this.props.role !== 3) {
+      return this.setState({ modalRole: true });
+    }
+
     if (this.props.login) {
       let idproduk = this.state.produk.id;
       let iduser = this.props.id;
@@ -81,8 +86,8 @@ class DetailProduk extends Component {
 
   render() {
     let { produk } = this.state;
-    console.log(this.state.qty);
-    console.log(produk);
+    // console.log(this.state.qty);
+    // console.log(produk);
     if (this.state.redirectCart) {
       return <Redirect to="/cart" />;
     }
@@ -275,6 +280,30 @@ class DetailProduk extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
+
+          {/* MODAL HARUS LOGIN SEBAGAI USER */}
+          <Modal
+            show={this.state.modalRole}
+            onHide={() =>
+              this.setState({
+                modalRole: !this.state.modalRole
+              })
+            }
+            size="sm"
+            centered
+          >
+            <Modal.Body>
+              Anda Harus Login Sebagai Pembeli untuk membeli Produk ini
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="info"
+                onClick={() => this.setState({ modalRole: false })}
+              >
+                Ok
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Container>
 
         <Footer />
@@ -286,10 +315,9 @@ class DetailProduk extends Component {
 const MapstateToprops = state => {
   return {
     id: state.auth.id,
-    login: state.auth.login
+    login: state.auth.login,
+    role: state.auth.roleId
   };
 };
 
 export default connect(MapstateToprops, { getCart })(DetailProduk);
-
-//Proteksi Jika Akun Penjual atau admin mau beli

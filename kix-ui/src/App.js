@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 
 //Utility
-// import Axios from "axios";
-// import { APIURL } from "./helper/apiUrl";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "./redux/actions";
@@ -32,24 +30,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getUser();
-    // let id = localStorage.getItem("kix");
-    // if (id) {
-    //   Axios.get(`${APIURL}user/login/${id}`)
-    //     .then(res => {
-    //       if (res.data.length) {
-    //         // console.log(res.data[0]);
-    //         this.props.getDataUser(res.data[0]);
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     })
-    //     .finally(() => {
-    //       this.setState({ loading: false });
-    //     });
-    // } else {
-    //   this.setState({ loading: false });
-    // }
   }
 
   render() {

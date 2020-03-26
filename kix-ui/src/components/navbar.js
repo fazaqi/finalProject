@@ -84,14 +84,14 @@ class Header extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/">Separated link</NavDropdown.Item>
               </NavDropdown>
-              <Form inline autoComplete="off">
+              {/* <Form inline autoComplete="off">
                 <input
                   type="text"
                   className="searchBar"
                   name="search"
                   placeholder="Cari di sini.."
                 />
-              </Form>
+              </Form> */}
             </Nav>
             {this.props.role === 1 ? (
               // UNTUK MENU ADMIN
@@ -158,7 +158,7 @@ class Header extends Component {
             ) : this.props.role === 2 ? (
               // UNTUK MENU PENJUAL
               <Nav className="ml-auto">
-                <Button variant="light" onMouseDown={this.handleDefault}>
+                {/* <Button variant="light" onMouseDown={this.handleDefault}>
                   <FiBell
                     style={{ fontSize: "20px" }}
                     className="d-inline-block"
@@ -170,7 +170,7 @@ class Header extends Component {
                   >
                     0
                   </Badge>
-                </Button>
+                </Button> */}
                 <div className="leftBorderDiv"></div>
 
                 <NavDropdown

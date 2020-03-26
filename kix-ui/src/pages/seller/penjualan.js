@@ -3,9 +3,10 @@ import { Row, Col, Tab, Nav, Card, Button, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import Axios from "axios";
 import { APIURL } from "../../helper/apiUrl";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Numeral from "numeral";
 import Footer from "../../components/footer";
+import NotFound from "../notfound";
 
 class Penjualan extends Component {
   state = {
@@ -264,6 +265,12 @@ class Penjualan extends Component {
 
   render() {
     console.log(this.state);
+    if (this.props.role !== 2) {
+      return <NotFound />;
+    }
+    if (this.props.login === false) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <div className="container mb-5">
@@ -328,7 +335,8 @@ class Penjualan extends Component {
 const MapstateToprops = state => {
   return {
     id: state.auth.id,
-    login: state.auth.login
+    login: state.auth.login,
+    role: state.auth.roleId
   };
 };
 

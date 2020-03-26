@@ -21,6 +21,7 @@ import { getCart } from "../redux/actions";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import Loading from "../components/loading";
 import cart from "../support/icon/add-to-cart.svg";
+import NotFound from "./notfound";
 
 class Cart extends Component {
   state = { cart: [], toOrder: false };
@@ -188,6 +189,9 @@ class Cart extends Component {
     if (this.state.cart === null) {
       return <Loading />;
     }
+    if (this.props.role !== 3) {
+      return <NotFound />;
+    }
     console.log(this.state);
     if (this.props.cart === 0) {
       return (
@@ -289,7 +293,8 @@ const MapstateToprops = state => {
   return {
     id: state.auth.id,
     login: state.auth.login,
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    role: state.cart.roleId
   };
 };
 

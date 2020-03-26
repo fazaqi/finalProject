@@ -20,7 +20,8 @@ const {
   produkRoutes,
   transactionRoutes,
   adminRoutes,
-  penjualRoutes
+  penjualRoutes,
+  shopRoutes
 } = require("./routes");
 
 app.use("/user", logregRoutes);
@@ -29,5 +30,6 @@ app.use("/manage", produkRoutes);
 app.use("/trans", transactionRoutes);
 app.use("/admin", adminRoutes);
 app.use("/seller", penjualRoutes);
+app.use("/shop", shopRoutes);
 
 app.listen(PORT, () => console.log("API Active on Port", PORT));

@@ -6,6 +6,8 @@ import { APIURL } from "../../helper/apiUrl";
 import Numeral from "numeral";
 import Loading from "../../components/loading";
 import order from "../../support/icon/order.svg";
+import { connect } from "react-redux";
+import NotFound from "../notfound";
 
 class Pembayaran extends Component {
   state = {
@@ -277,6 +279,9 @@ class Pembayaran extends Component {
 
   render() {
     console.log(this.state);
+    if (this.props.role !== 1) {
+      return <NotFound />;
+    }
     if (this.state.loading) {
       return <Loading />;
     }
@@ -369,4 +374,12 @@ class Pembayaran extends Component {
   }
 }
 
-export default Pembayaran;
+const MapstateToprops = state => {
+  return {
+    id: state.auth.id,
+    login: state.auth.login,
+    role: state.auth.roleId
+  };
+};
+
+export default connect(MapstateToprops)(Pembayaran);

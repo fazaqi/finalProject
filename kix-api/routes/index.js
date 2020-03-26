@@ -4,6 +4,7 @@ const produkRoutes = require("./produkRoutes");
 const transactionRoutes = require("./transactionRoutes");
 const adminRoutes = require("./adminRoutes");
 const penjualRoutes = require("./penjualRoutes");
+const shopRoutes = require("./shopRoutes");
 
 module.exports = {
   logregRoutes,
@@ -11,5 +12,6 @@ module.exports = {
   produkRoutes,
   transactionRoutes,
   adminRoutes,
-  penjualRoutes
+  penjualRoutes,
+  shopRoutes
 };

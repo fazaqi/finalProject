@@ -155,13 +155,15 @@ class ManageProduk extends Component {
     let deskripsi = this.refs.deskripsi.value;
     let gambar = this.state.gambar[0];
     let kategori = this.refs.kategori.value;
+    let stok = this.refs.stok.value;
 
     let data = {
       nama,
       harga,
       deskripsi,
       usersId: this.props.id,
-      kategori
+      kategori,
+      stok
     };
     console.log(data);
     // console.log(gambar[0]);

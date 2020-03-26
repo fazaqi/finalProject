@@ -41,7 +41,8 @@ module.exports = {
           harga: data.harga,
           deskripsi: data.deskripsi,
           categoryId: data.kategori,
-          usersId: data.usersId
+          usersId: data.usersId,
+          stok: data.stok
         };
         console.log(data);
 
@@ -173,7 +174,7 @@ module.exports = {
                  ON p.id=pi.productsId JOIN users_penjual up
                  ON up.usersId=p.usersId
                  WHERE p.deleted=0 
-                 ORDER BY RAND()`;
+                 ORDER BY RAND() LIMIT 6`;
 
       db.query(sql, (err, result) => {
         if (err) res.status(500).send({ message: "Get Produk Error", err });

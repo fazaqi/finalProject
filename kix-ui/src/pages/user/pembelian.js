@@ -9,6 +9,7 @@ import { APIURL } from "../../helper/apiUrl";
 import { Link, Redirect } from "react-router-dom";
 import Numeral from "numeral";
 import { AiTwotoneShop } from "react-icons/ai";
+import NotFound from "../notfound";
 
 class Pembelian extends Component {
   state = {
@@ -695,6 +696,9 @@ class Pembelian extends Component {
     if (this.props.login === false) {
       return <Redirect to="/" />;
     }
+    if (this.props.role !== 3) {
+      return <NotFound />;
+    }
     if (this.state.loading) {
       return <Loading />;
     }
@@ -870,7 +874,8 @@ const MapstateToprops = state => {
   return {
     id: state.auth.id,
     login: state.auth.login,
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    role: state.auth.roleId
   };
 };
 

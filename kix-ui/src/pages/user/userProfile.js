@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { getUser, updateUser, getDetail } from "../../redux/actions";
 import Axios from "axios";
 import { APIURL } from "../../helper/apiUrl";
+import NotFound from "../notfound";
 
 class Profile extends Component {
   state = {};
@@ -69,6 +70,9 @@ class Profile extends Component {
   render() {
     if (this.props.login === false) {
       return <Redirect to="/" />;
+    }
+    if (this.props.role !== 3) {
+      return <NotFound />;
     }
 
     return (
