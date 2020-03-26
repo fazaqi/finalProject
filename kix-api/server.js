@@ -18,12 +18,16 @@ const {
   logregRoutes,
   userRoutes,
   produkRoutes,
-  transactionRoutes
+  transactionRoutes,
+  adminRoutes,
+  penjualRoutes
 } = require("./routes");
 
 app.use("/user", logregRoutes);
 app.use("/manage", userRoutes);
 app.use("/manage", produkRoutes);
 app.use("/trans", transactionRoutes);
+app.use("/admin", adminRoutes);
+app.use("/seller", penjualRoutes);
 
 app.listen(PORT, () => console.log("API Active on Port", PORT));

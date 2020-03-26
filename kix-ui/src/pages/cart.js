@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
 import {
-  InputGroup,
   Card,
   Row,
   Col,
   Button,
   OverlayTrigger,
-  Tooltip,
-  FormControl
+  Tooltip
 } from "react-bootstrap";
 import { FiTrash2 } from "react-icons/fi";
 
@@ -22,9 +20,10 @@ import { Link, Redirect } from "react-router-dom";
 import { getCart } from "../redux/actions";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import Loading from "../components/loading";
+import cart from "../support/icon/add-to-cart.svg";
 
 class Cart extends Component {
-  state = { cart: [] };
+  state = { cart: [], toOrder: false };
 
   componentDidMount() {
     this.getCart();
@@ -60,8 +59,46 @@ class Cart extends Component {
       });
   };
 
+  plusQty = id => {
+    console.log(id);
+  };
+
+  minQty = id => {
+    console.log(id);
+  };
+
+  onCheckout = () => {
+    console.log(this.state.cart);
+    let dataTrans = this.state.cart;
+    let tot = 0;
+    this.state.cart.forEach(val => {
+      tot += val.qty * val.harga;
+    });
+    let usersId = this.props.id;
+    let data = { usersId, totalBelanja: tot, dataTrans };
+
+    Axios.post(`${APIURL}trans/checkout`, data)
+      .then(res => {
+        console.log(res);
+        this.props.getCart();
+        this.setState({ toOrder: true });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   notify = () => {
     toast.success("Item Berhasil Dihapus Dari Cart");
+  };
+
+  renderTotalBelanja = () => {
+    let tot = 0;
+    this.state.cart.forEach(val => {
+      tot += val.qty * val.harga;
+    });
+
+    return "Rp " + Numeral(tot).format("0,0");
   };
 
   renderCart = () => {
@@ -91,6 +128,7 @@ class Cart extends Component {
                   <Row style={{ color: "tomato", fontWeight: "bolder" }}>
                     {"Rp " + Numeral(val.harga).format("0,0")}
                   </Row>
+                  <Row>{val.qty} pcs</Row>
                   <br />
                   <br />
                   <Link
@@ -103,38 +141,17 @@ class Cart extends Component {
                   </Link>
                 </Col>
                 <Col>
-                  <Row className="ml-3">Quantity</Row>
-                  <br />
                   <Row>
-                    {/* /////// */}
-                    <InputGroup style={{ width: "120px" }}>
-                      <InputGroup.Prepend>
-                        <Button
-                          variant="outline-secondary"
-                          onClick={this.minQty}
-                        >
-                          {" "}
-                          -{" "}
-                        </Button>
-                      </InputGroup.Prepend>
-                      <FormControl
-                        type="number"
-                        readOnly
-                        defaultValue={val.qty}
-                        style={{ textAlign: "center" }}
-                      />
-                      <InputGroup.Append>
-                        <Button
-                          variant="outline-secondary"
-                          onClick={this.plusQty}
-                        >
-                          {" "}
-                          +{" "}
-                        </Button>
-                      </InputGroup.Append>
-                    </InputGroup>
-                    {/* ////// */}
+                    Total :
+                    <span
+                      className="ml-2"
+                      style={{ color: "tomato", fontWeight: "bolder" }}
+                    >
+                      {"Rp " + Numeral(val.totharga).format("0,0")}
+                    </span>
                   </Row>
+                  <br />
+                  <Row></Row>
                 </Col>
                 <Col>
                   <div style={{ float: "right" }}>
@@ -165,9 +182,41 @@ class Cart extends Component {
     if (!this.props.login) {
       return <Redirect to="/" />;
     }
+    if (this.state.toOrder) {
+      return <Redirect to="/order" />;
+    }
     if (this.state.cart === null) {
       return <Loading />;
     }
+    console.log(this.state);
+    if (this.props.cart === 0) {
+      return (
+        <div>
+          <div className="container mb-5">
+            <div className="mt-5">
+              <h2 className="kix">Cart</h2>
+              <hr />
+              <div className="text-center">
+                <img
+                  className="mt-5"
+                  src={cart}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+                <p className="mt-5 ">Oops. Keranjangmu Masih Kosong</p>
+                <p className="mt-1 ">Silahkan Belanja Terlebih Dahulu</p>
+                <Button variant="info" className="mt-5">
+                  To Shop
+                </Button>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className="container mb-5">
@@ -179,13 +228,45 @@ class Cart extends Component {
                 <Col lg={8}>{this.renderCart()}</Col>
                 <Col>
                   <Card>
-                    <Card.Body>asdwasd</Card.Body>
+                    <Card.Body>
+                      <Row
+                        style={{
+                          color: "tomato",
+                          fontWeight: "bolder",
+                          marginBottom: "2rem"
+                        }}
+                      >
+                        <div
+                          style={{ marginLeft: "auto", marginRight: "auto" }}
+                        >
+                          Total Belanja : {this.renderTotalBelanja()}
+                        </div>
+                      </Row>
+                      <Row>
+                        <Button
+                          variant="success"
+                          style={{ width: "100%", margin: "1rem" }}
+                          onClick={this.onCheckout}
+                        >
+                          Checkout
+                        </Button>
+                      </Row>
+                      <Row>
+                        <Button
+                          variant="secondary"
+                          style={{ width: "100%", margin: "1rem" }}
+                        >
+                          Belanja Lagi
+                        </Button>
+                      </Row>
+                    </Card.Body>
                   </Card>
                 </Col>
               </Row>
             </div>
           </div>
         </div>
+
         <ToastContainer
           transition={Slide}
           position="bottom-right"
@@ -207,7 +288,8 @@ class Cart extends Component {
 const MapstateToprops = state => {
   return {
     id: state.auth.id,
-    login: state.auth.login
+    login: state.auth.login,
+    cart: state.cart.cart
   };
 };
 

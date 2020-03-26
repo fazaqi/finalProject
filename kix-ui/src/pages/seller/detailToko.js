@@ -1,16 +1,7 @@
 import React, { Component } from "react";
-import {
-  Row,
-  Col,
-  Container,
-  Card,
-  Button,
-  OverlayTrigger,
-  Tooltip
-} from "react-bootstrap";
+import { Row, Col, Container, Card } from "react-bootstrap";
 
 import Numeral from "numeral";
-import { FaRegHeart } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 import shopimg from "../../support/icon/shop.svg";
@@ -93,7 +84,7 @@ class DetailToko extends Component {
                 {"Rp " + Numeral(val.harga).format("0,0")}
               </Card.Text>
             </Card.Body>
-            <div>
+            {/* <div>
               <Button
                 variant="info"
                 style={{
@@ -121,7 +112,7 @@ class DetailToko extends Component {
                   <FaRegHeart />
                 </Button>
               </OverlayTrigger>
-            </div>
+            </div> */}
           </Card>
         );
       });

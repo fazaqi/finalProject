@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import Axios from "axios";
 import { APIURL } from "../helper/apiUrl";
 import Loading from "./loading";
 import Numeral from "numeral";
 import { AiTwotoneShop } from "react-icons/ai";
-import { FaRegHeart } from "react-icons/fa";
-
 import { Link } from "react-router-dom";
 
 class HomeCard extends Component {
@@ -17,7 +15,7 @@ class HomeCard extends Component {
   componentDidMount() {
     Axios.get(`${APIURL}manage/getallprod`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ produk: res.data });
       })
       .catch(err => {

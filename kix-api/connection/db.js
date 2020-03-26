@@ -5,7 +5,8 @@ const db = mysql.createConnection({
   user: "root",
   password: "kukukakikake",
   database: "db_kixstore",
-  port: "3306"
+  port: "3306",
+  multipleStatements: true
 });
 
 module.exports = db;

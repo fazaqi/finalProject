@@ -23,6 +23,9 @@ import DetailProduk from "./pages/detailProduk";
 import DetailToko from "./pages/seller/detailToko";
 import Cart from "./pages/cart";
 import Shop from "./pages/shop";
+import Pembelian from "./pages/user/pembelian";
+import Pembayaran from "./pages/admin/pembayaran";
+import Penjualan from "./pages/seller/penjualan";
 
 class App extends Component {
   state = {};
@@ -68,6 +71,9 @@ class App extends Component {
           <Route path="/detail-toko/:id" exact component={DetailToko} />
           <Route path="/cart" exact component={Cart} />
           <Route path="/shop" exact component={Shop} />
+          <Route path="/order" exact component={Pembelian} />
+          <Route path="/payment" exact component={Pembayaran} />
+          <Route path="/penjualan" exact component={Penjualan} />
           <Route path="/test" exact component={Tes} />
           <Route path="/*" component={NotFound} />
         </Switch>

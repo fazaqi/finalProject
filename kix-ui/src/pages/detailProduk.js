@@ -13,7 +13,6 @@ import {
   Modal
 } from "react-bootstrap";
 import Numeral from "numeral";
-import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCart } from "../redux/actions";
@@ -292,3 +291,5 @@ const MapstateToprops = state => {
 };
 
 export default connect(MapstateToprops, { getCart })(DetailProduk);
+
+//Proteksi Jika Akun Penjual atau admin mau beli

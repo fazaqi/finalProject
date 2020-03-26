@@ -90,6 +90,10 @@ body {
   overflow: hidden;
 }
 
+.btnTransaksi:target {
+  background-color: #30d8b1 !important;
+  color: #162b3d;
+}
 /* =============== */
 
 .loginform {

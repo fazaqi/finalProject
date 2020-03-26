@@ -30,7 +30,7 @@ CREATE TABLE `cart` (
   `qty` int DEFAULT NULL,
   `deleted` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,29,14,21,9,0),(2,30,14,21,2,0),(3,37,15,36,2,0),(4,32,15,36,3,0),(5,30,15,21,2,0),(6,31,15,21,1,0),(7,35,15,36,2,0);
+INSERT INTO `cart` VALUES (1,29,14,21,9,1),(2,30,14,21,2,1),(3,37,15,36,2,1),(4,32,15,36,3,1),(5,30,15,21,2,1),(6,31,15,21,1,1),(7,35,15,36,2,1),(8,32,14,36,1,1),(9,29,37,21,1,1),(10,37,14,36,1,1),(11,37,18,36,1,1);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (29,'Adidas',1250000,'Sneakers Kekinian',3,50,21,0),(30,'Jim Joker',700000,'Sepatu Pantovel',2,30,21,0),(31,'Nike Epic React Flyknit 2',900000,'Sepatu Nike Keren',3,10,21,0),(32,'Nike Air Jordan',1799000,'Nike Air Jordan 100% Original',3,5,36,0),(33,'Air Jordan 1 Mid',2499000,'Air Jordan 100% Original',3,NULL,36,1),(34,'Air Jordan 1 Mid',2499000,'Air Jordan 100% Original',3,NULL,36,1),(35,'Air Jordan 1 Mid',2500000,'Air Jordan 100% ORI',3,10,36,0),(36,'Vans AVE Pro',2400000,'Vans Original',1,NULL,36,1),(37,'Adidas NMD',5000000,'Limited Edition!!!',3,5,36,0);
+INSERT INTO `products` VALUES (29,'Adidas',1250000,'Sneakers Kekinian',3,20,21,0),(30,'Jim Joker',700000,'Sepatu Pantovel',2,23,21,0),(31,'Nike Epic React Flyknit 2',900000,'Sepatu Nike Keren',3,9,21,0),(32,'Nike Air Jordan',1799000,'Nike Air Jordan 100% Original',3,2,36,0),(33,'Air Jordan 1 Mid',2499000,'Air Jordan 100% Original',3,NULL,36,1),(34,'Air Jordan 1 Mid',2499000,'Air Jordan 100% Original',3,NULL,36,1),(35,'Air Jordan 1 Mid',2500000,'Air Jordan 100% ORI',3,8,36,0),(36,'Vans AVE Pro',2400000,'Vans Original',1,NULL,36,1),(37,'Adidas NMD',5000000,'Limited Edition!!!',3,2,36,0);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,6 +152,63 @@ LOCK TABLES `products_size` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transaction` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usersId` int NOT NULL,
+  `totalharga` int NOT NULL,
+  `buktibayar` varchar(1000) DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` VALUES (6,14,14449000,'/payment/images/PAYMENT1585215949546.jpg','paid'),(7,14,5000000,NULL,'cancelled'),(8,15,22697000,NULL,'waitPayment'),(9,18,5000000,'/payment/images/PAYMENT1585235196996.jpg','paid');
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transaction_detail`
+--
+
+DROP TABLE IF EXISTS `transaction_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transaction_detail` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usersId` int NOT NULL,
+  `productsId` int NOT NULL,
+  `sellerId` int NOT NULL,
+  `qty` int NOT NULL,
+  `harga` int DEFAULT NULL,
+  `paymentId` int DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction_detail`
+--
+
+LOCK TABLES `transaction_detail` WRITE;
+/*!40000 ALTER TABLE `transaction_detail` DISABLE KEYS */;
+INSERT INTO `transaction_detail` VALUES (19,14,29,21,9,11250000,6,'finished'),(20,14,30,21,2,1400000,6,'onProcess'),(21,14,32,36,1,1799000,6,'finished'),(22,14,37,36,1,5000000,7,'cancelled'),(23,15,37,36,2,10000000,8,'waitPayment'),(24,15,32,36,3,5397000,8,'waitPayment'),(25,15,30,21,2,1400000,8,'waitPayment'),(26,15,31,21,1,900000,8,'waitPayment'),(27,15,35,36,2,5000000,8,'waitPayment'),(28,18,37,36,1,5000000,9,'finished');
+/*!40000 ALTER TABLE `transaction_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -165,7 +222,7 @@ CREATE TABLE `users` (
   `email` varchar(45) NOT NULL,
   `roleId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +231,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','738660d0ea58a9a0d9c2baf4ea076d562244fb3369fafcda5e3f13fa7191688b','admin@bambang.com',1),(14,'joji','c95c640d1d55a62ef778d3a982b41b3bec0107ea40622e1814a0a7103f3388f3','joji@gmail.com',3),(15,'bambang','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','bambang@abang.com',3),(16,'joko','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','joko@kijoko.com',3),(17,'budi','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','budi@idub.com',3),(18,'ani','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','ani@ina.com',3),(20,'subur','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','subur@rubus.com',2),(21,'kakimu','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','kakimu@google.com',2),(36,'kicks','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','kicks@kicks.com',2);
+INSERT INTO `users` VALUES (1,'admin','738660d0ea58a9a0d9c2baf4ea076d562244fb3369fafcda5e3f13fa7191688b','admin@bambang.com',1),(14,'joji','c95c640d1d55a62ef778d3a982b41b3bec0107ea40622e1814a0a7103f3388f3','joji@gmail.com',3),(15,'bambang','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','bambang@abang.com',3),(16,'joko','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','joko@kijoko.com',3),(17,'budi','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','budi@idub.com',3),(18,'ani','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','ani@ina.com',3),(20,'subur','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','subur@rubus.com',2),(21,'kakimu','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','kakimu@google.com',2),(36,'kicks','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','kicks@kicks.com',2),(37,'abdul','1a49cd379b97326e05723b22b19b96fbcbdc8bc5c0293e2161246b451ab795d9','abedul@dul.com',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +253,7 @@ CREATE TABLE `users_pembeli` (
   PRIMARY KEY (`id`),
   KEY `fk_users_pembeli_usersId_idx` (`usersId`),
   CONSTRAINT `fk_users_pembeli_usersId` FOREIGN KEY (`usersId`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +262,7 @@ CREATE TABLE `users_pembeli` (
 
 LOCK TABLES `users_pembeli` WRITE;
 /*!40000 ALTER TABLE `users_pembeli` DISABLE KEYS */;
-INSERT INTO `users_pembeli` VALUES (10,'Joji Joshua','Bekasoy Geboy ','joji@gmail.com','Pria','082210293219',14),(11,'Bambang Pamungkas','Jakarta, Kemayoran','bambang@abang.com','Pria','089876451234',15),(12,'Ki Joko Bodo','Jawa','joko@kijoko.com','Pria','087712345678',16),(13,NULL,NULL,'budi@idub.com',NULL,NULL,17),(14,'Ani Wati','Bandung','ani@ina.com','Wanita','085712345678',18);
+INSERT INTO `users_pembeli` VALUES (10,'Joji Joshua','Bekasoy Geboy ','joji@gmail.com','Pria','082210293219',14),(11,'Bambang Pamungkas','Jakarta, Kemayoran','bambang@abang.com','Pria','089876451234',15),(12,'Ki Joko Bodo','Jawa','joko@kijoko.com','Pria','087712345678',16),(13,NULL,NULL,'budi@idub.com',NULL,NULL,17),(14,'Ani Wati','Bandung','ani@ina.com','Wanita','085712345678',18),(27,NULL,NULL,'abedul@dul.com',NULL,NULL,37);
 /*!40000 ALTER TABLE `users_pembeli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-25 15:47:31
+-- Dump completed on 2020-03-26 22:17:32

@@ -55,6 +55,13 @@ class Header extends Component {
             this.props.username}
         </div>
       );
+    } else if (this.props.role === 1) {
+      dropdownTitle = (
+        <div style={{ display: "inline-block" }}>
+          <FaRegUserCircle className="mr-2 mb-1" style={{ fontSize: "18" }} />
+          {this.props.username}
+        </div>
+      );
     }
     return (
       <div>
@@ -86,11 +93,24 @@ class Header extends Component {
                 />
               </Form>
             </Nav>
-            {this.props.role === 0 ? (
+            {this.props.role === 1 ? (
               // UNTUK MENU ADMIN
               <Nav className="ml-auto">
-                <Nav.Link href="/login">Masuk</Nav.Link>
-                <Nav.Link href="/register">Daftar</Nav.Link>
+                <NavDropdown
+                  alignRight
+                  title={dropdownTitle}
+                  id="basic-nav-dropdown"
+                  className="mt-"
+                >
+                  <NavDropdown.Item href="/payment">
+                    Pembayaran
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={this.onLogout}>
+                    <MdExitToApp className="mr-2" /> Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+                {/* <Nav.Link href="/profile">Hi, {this.props.username}</Nav.Link> */}
               </Nav>
             ) : this.props.role === 3 ? (
               // UNTUK MENU PEMBELI
@@ -124,7 +144,7 @@ class Header extends Component {
                   id="basic-nav-dropdown"
                   className="mt-"
                 >
-                  <NavDropdown.Item href="/cart">Pembelian</NavDropdown.Item>
+                  <NavDropdown.Item href="/order">Pembelian</NavDropdown.Item>
                   <NavDropdown.Item href="/profile-user">
                     Pengaturan Profil
                   </NavDropdown.Item>
@@ -166,6 +186,9 @@ class Header extends Component {
                 >
                   <NavDropdown.Item href="/profile-seller">
                     <MdSettings className="mr-2" /> Profil Toko
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/penjualan">
+                    Penjualan
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/manage-produk">
                     <FaDolly className="mr-2" /> Atur Produk
