@@ -24,6 +24,7 @@ import Shop from "./pages/shop";
 import Pembelian from "./pages/user/pembelian";
 import Pembayaran from "./pages/admin/pembayaran";
 import Penjualan from "./pages/seller/penjualan";
+import ResetPass from "./pages/resetPass";
 
 class App extends Component {
   state = {};
@@ -54,6 +55,7 @@ class App extends Component {
           <Route path="/order" exact component={Pembelian} />
           <Route path="/payment" exact component={Pembayaran} />
           <Route path="/penjualan" exact component={Penjualan} />
+          <Route path="/resetpass" exact component={ResetPass} />
           <Route path="/test" exact component={Tes} />
           <Route path="/*" component={NotFound} />
         </Switch>

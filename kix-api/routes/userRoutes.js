@@ -6,5 +6,6 @@ router.post("/getuser", userController.getDetailUser);
 router.get("/getdetailtoko/:id", userController.getDetailToko);
 router.put("/updateuser/:id", userController.updateUser);
 router.put("/updatetoko/:id", userController.updateToko);
+router.post("/resetpass", userController.changePass);
 
 module.exports = router;

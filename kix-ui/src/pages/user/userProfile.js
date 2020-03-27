@@ -9,7 +9,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 
 //Utility
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser, updateUser, getDetail } from "../../redux/actions";
 import Axios from "axios";
@@ -183,6 +183,11 @@ class Profile extends Component {
                   <Button type="button" onClick={this.btnSimpan} size="lg">
                     Simpan
                   </Button>
+                  <Link to="/resetpass">
+                    <Button variant="warning" className="ml-3" size="lg">
+                      Ubah Password
+                    </Button>
+                  </Link>
                 </Col>
               </Form.Group>
             </Form>

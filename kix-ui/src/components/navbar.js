@@ -73,7 +73,10 @@ class Header extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <NavDropdown
+              <Nav.Item className=" mr-3 ml-3">
+                <Nav.Link href="/shop">Shop</Nav.Link>
+              </Nav.Item>
+              {/* <NavDropdown
                 title="Kategori"
                 id="basic-nav-dropdown"
                 className="mt-1 mr-3 ml-3"
@@ -83,7 +86,7 @@ class Header extends Component {
                 <NavDropdown.Item href="/">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/">Separated link</NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
               {/* <Form inline autoComplete="off">
                 <input
                   type="text"

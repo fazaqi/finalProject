@@ -53,5 +53,33 @@ module.exports = {
       }
       return res.status(200).send(result);
     });
+  },
+  changePass: (req, res) => {
+    const { id, passlama, passbaru } = req.body;
+    const hashpasslama = crypto(passlama);
+    const hashpassbaru = crypto(passbaru);
+
+    // console.log(hashpasslama);
+
+    let sql = `SELECT * FROM users WHERE id=${id} AND password='${hashpasslama}'`;
+    db.query(sql, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send({ message: "Get Error" });
+      }
+      if (result.length === 0) {
+        return res.status(200).send({ message: "Pass Lama Salah" });
+      }
+      if (result.length) {
+        sql = `UPDATE users SET password='${hashpassbaru}' WHERE id=${id}`;
+        db.query(sql, (err, resUpdate) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).send({ message: "Get Error" });
+          }
+          return res.status(200).send({ message: "Update Pass Berhasil" });
+        });
+      }
+    });
   }
 };
